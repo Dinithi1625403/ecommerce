@@ -93,30 +93,26 @@ export default function LoginPage() {
   if (!mounted) {
     return null; // Prevent hydration mismatch
   }
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-gray-800 flex items-center justify-center p-4 relative overflow-hidden" style={{background: 'linear-gradient(135deg, #000000 0%, #292929 50%, #5C5C5C 100%)'}}>
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 opacity-20 blur-3xl animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full bg-gradient-to-r from-blue-400 to-cyan-400 opacity-20 blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full opacity-20 blur-3xl animate-pulse" style={{background: 'linear-gradient(45deg, #FFC72C, #FFFFFF)'}}></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full opacity-15 blur-3xl animate-pulse delay-1000" style={{background: 'linear-gradient(45deg, #FFC72C, #5C5C5C)'}}></div>
       </div>
 
       <div className="relative w-full max-w-md">
         {/* Main form container with glassmorphism */}
-        <div className="backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl shadow-2xl p-8 transform transition-all duration-700 hover:scale-[1.02]">
-          {/* Header */}
+        <div className="backdrop-blur-xl border rounded-2xl shadow-2xl p-8 transform transition-all duration-700 hover:scale-[1.02]" style={{backgroundColor: 'rgba(41, 41, 41, 0.8)', borderColor: 'rgba(255, 199, 44, 0.3)'}}>          {/* Header */}
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full mb-4 shadow-lg">
-              <Lock className="text-white" size={24} />
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-4 shadow-lg" style={{backgroundColor: '#FFC72C'}}>
+              <Lock className="text-black" size={24} />
             </div>
             <h1 className="text-3xl font-bold text-white mb-2">Welcome Back</h1>
-            <p className="text-gray-300">Sign in to your account</p>
-          </div>
-
-          {/* Status messages */}
+            <p style={{color: '#5C5C5C'}}>Sign in to your account</p>
+          </div>          {/* Status messages */}
           {error && (
-            <div className="mb-6 p-4 bg-red-500/20 border border-red-500/30 rounded-xl backdrop-blur-sm animate-shake">
+            <div className="mb-6 p-4 rounded-xl backdrop-blur-sm animate-shake" style={{backgroundColor: 'rgba(255, 0, 0, 0.1)', border: '1px solid rgba(255, 0, 0, 0.3)'}}>
               <div className="flex items-center gap-3">
                 <XCircle className="text-red-400 flex-shrink-0" size={20} />
                 <p className="text-red-200 text-sm">{error}</p>
@@ -125,29 +121,27 @@ export default function LoginPage() {
           )}
 
           {success && (
-            <div className="mb-6 p-4 bg-green-500/20 border border-green-500/30 rounded-xl backdrop-blur-sm animate-bounce">
+            <div className="mb-6 p-4 rounded-xl backdrop-blur-sm animate-bounce" style={{backgroundColor: 'rgba(255, 199, 44, 0.2)', border: '1px solid #FFC72C'}}>
               <div className="flex items-center gap-3">
-                <CheckCircle2 className="text-green-400 flex-shrink-0" size={20} />
-                <p className="text-green-200 text-sm">{success}</p>
+                <CheckCircle2 style={{color: '#FFC72C'}} className="flex-shrink-0" size={20} />
+                <p className="text-white text-sm">{success}</p>
               </div>
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-6" noValidate>
-            {/* Email field */}
+          <form onSubmit={handleSubmit} className="space-y-6" noValidate>            {/* Email field */}
             <div className="space-y-2">
               <label 
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-200"
+                className="block text-sm font-medium text-white"
               >
                 Email Address
               </label>
               <div className="relative group">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <Mail 
-                    className={`transition-colors duration-200 ${
-                      emailFocused ? 'text-purple-400' : 'text-gray-400'
-                    }`} 
+                    className="transition-colors duration-200"
+                    style={{color: emailFocused ? '#FFC72C' : '#5C5C5C'}}
                     size={20} 
                   />
                 </div>
@@ -155,15 +149,26 @@ export default function LoginPage() {
                   id="email"
                   type="email"
                   placeholder="Enter your email"
-                  className={`w-full pl-10 pr-4 py-3 bg-white/5 border rounded-xl text-white placeholder-gray-400 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent ${
-                    formErrors.email 
-                      ? 'border-red-500 focus:ring-red-500' 
-                      : 'border-white/20 hover:border-white/30'
-                  }`}
+                  className="w-full pl-10 pr-4 py-3 rounded-xl text-white transition-all duration-200 focus:outline-none focus:ring-2"
+                  style={{
+                    backgroundColor: 'rgba(92, 92, 92, 0.2)',
+                    border: formErrors.email 
+                      ? '1px solid red' 
+                      : '1px solid rgba(92, 92, 92, 0.5)',
+                    '::placeholder': {color: '#5C5C5C'}
+                  }}
+                  onFocus={(e) => {
+                    setEmailFocused(true);
+                    e.target.style.borderColor = '#FFC72C';
+                    e.target.style.boxShadow = '0 0 0 2px rgba(255, 199, 44, 0.2)';
+                  }}
+                  onBlur={(e) => {
+                    setEmailFocused(false);
+                    e.target.style.borderColor = formErrors.email ? 'red' : 'rgba(92, 92, 92, 0.5)';
+                    e.target.style.boxShadow = 'none';
+                  }}
                   value={email}
                   onChange={handleEmailChange}
-                  onFocus={() => setEmailFocused(true)}
-                  onBlur={() => setEmailFocused(false)}
                   required
                   aria-describedby={formErrors.email ? "email-error" : undefined}
                 />
@@ -173,22 +178,19 @@ export default function LoginPage() {
                   {formErrors.email}
                 </p>
               )}
-            </div>
-
-            {/* Password field */}
+            </div>            {/* Password field */}
             <div className="space-y-2">
               <label 
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-200"
+                className="block text-sm font-medium text-white"
               >
                 Password
               </label>
               <div className="relative group">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <Lock 
-                    className={`transition-colors duration-200 ${
-                      passwordFocused ? 'text-purple-400' : 'text-gray-400'
-                    }`} 
+                    className="transition-colors duration-200"
+                    style={{color: passwordFocused ? '#FFC72C' : '#5C5C5C'}}
                     size={20} 
                   />
                 </div>
@@ -196,28 +198,42 @@ export default function LoginPage() {
                   id="password"
                   type={showPassword ? "text" : "password"}
                   placeholder="Enter your password"
-                  className={`w-full pl-10 pr-12 py-3 bg-white/5 border rounded-xl text-white placeholder-gray-400 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent ${
-                    formErrors.password 
-                      ? 'border-red-500 focus:ring-red-500' 
-                      : 'border-white/20 hover:border-white/30'
-                  }`}
+                  className="w-full pl-10 pr-12 py-3 rounded-xl text-white transition-all duration-200 focus:outline-none focus:ring-2"
+                  style={{
+                    backgroundColor: 'rgba(92, 92, 92, 0.2)',
+                    border: formErrors.password 
+                      ? '1px solid red' 
+                      : '1px solid rgba(92, 92, 92, 0.5)',
+                    '::placeholder': {color: '#5C5C5C'}
+                  }}
+                  onFocus={(e) => {
+                    setPasswordFocused(true);
+                    e.target.style.borderColor = '#FFC72C';
+                    e.target.style.boxShadow = '0 0 0 2px rgba(255, 199, 44, 0.2)';
+                  }}
+                  onBlur={(e) => {
+                    setPasswordFocused(false);
+                    e.target.style.borderColor = formErrors.password ? 'red' : 'rgba(92, 92, 92, 0.5)';
+                    e.target.style.boxShadow = 'none';
+                  }}
                   value={password}
                   onChange={handlePasswordChange}
-                  onFocus={() => setPasswordFocused(true)}
-                  onBlur={() => setPasswordFocused(false)}
                   required
                   aria-describedby={formErrors.password ? "password-error" : undefined}
                 />
                 <button
                   type="button"
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center hover:bg-white/10 rounded-r-xl transition-colors duration-200"
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center rounded-r-xl transition-colors duration-200"
+                  style={{':hover': {backgroundColor: 'rgba(92, 92, 92, 0.2)'}}}
                   onClick={() => setShowPassword(!showPassword)}
                   aria-label={showPassword ? "Hide password" : "Show password"}
+                  onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(92, 92, 92, 0.2)'}
+                  onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
                 >
                   {showPassword ? (
-                    <EyeOff className="text-gray-400 hover:text-purple-400 transition-colors" size={20} />
+                    <EyeOff className="transition-colors" style={{color: '#5C5C5C'}} size={20} />
                   ) : (
-                    <Eye className="text-gray-400 hover:text-purple-400 transition-colors" size={20} />
+                    <Eye className="transition-colors" style={{color: '#5C5C5C'}} size={20} />
                   )}
                 </button>
               </div>
@@ -226,13 +242,28 @@ export default function LoginPage() {
                   {formErrors.password}
                 </p>
               )}
-            </div>
-
-            {/* Submit button */}
+            </div>            {/* Submit button */}
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full relative overflow-hidden bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 disabled:from-gray-600 disabled:to-gray-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-[1.02] hover:shadow-lg hover:shadow-purple-500/25 disabled:hover:scale-100 disabled:hover:shadow-none group"
+              className="w-full relative overflow-hidden font-semibold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-[1.02] hover:shadow-lg disabled:hover:scale-100 disabled:hover:shadow-none group"
+              style={{
+                backgroundColor: isLoading ? '#5C5C5C' : '#FFC72C',
+                color: '#000000',
+                boxShadow: isLoading ? 'none' : '0 4px 15px rgba(255, 199, 44, 0.3)'
+              }}
+              onMouseEnter={(e) => {
+                if (!isLoading) {
+                  e.target.style.backgroundColor = '#e6b428';
+                  e.target.style.boxShadow = '0 6px 20px rgba(255, 199, 44, 0.4)';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!isLoading) {
+                  e.target.style.backgroundColor = '#FFC72C';
+                  e.target.style.boxShadow = '0 4px 15px rgba(255, 199, 44, 0.3)';
+                }
+              }}
             >
               <span className="relative z-10 flex items-center justify-center gap-2">
                 {isLoading ? (
@@ -252,15 +283,16 @@ export default function LoginPage() {
               </span>
               <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
             </button>
-          </form>
-
-          {/* Footer */}
+          </form>          {/* Footer */}
           <div className="mt-8 text-center">
-            <p className="text-gray-300 text-sm">
+            <p className="text-white text-sm">
               Don't have an account?{" "}
               <a 
                 href="/signup" 
-                className="text-purple-400 hover:text-purple-300 font-medium transition-colors duration-200 hover:underline"
+                className="font-medium transition-colors duration-200 hover:underline"
+                style={{color: '#FFC72C'}}
+                onMouseEnter={(e) => e.target.style.color = '#e6b428'}
+                onMouseLeave={(e) => e.target.style.color = '#FFC72C'}
               >
                 Create Account
               </a>
@@ -271,16 +303,17 @@ export default function LoginPage() {
           <div className="mt-4 text-center">
             <a 
               href="/forgot-password" 
-              className="text-gray-400 hover:text-gray-300 text-xs transition-colors duration-200 hover:underline"
+              className="text-xs transition-colors duration-200 hover:underline"
+              style={{color: '#5C5C5C'}}
+              onMouseEnter={(e) => e.target.style.color = '#FFFFFF'}
+              onMouseLeave={(e) => e.target.style.color = '#5C5C5C'}
             >
               Forgot your password?
             </a>
           </div>
-        </div>
-
-        {/* Additional decorative elements */}
-        <div className="absolute -top-4 -left-4 w-8 h-8 border-l-2 border-t-2 border-purple-400/50 rounded-tl-lg"></div>
-        <div className="absolute -bottom-4 -right-4 w-8 h-8 border-r-2 border-b-2 border-pink-400/50 rounded-br-lg"></div>
+        </div>        {/* Additional decorative elements */}
+        <div className="absolute -top-4 -left-4 w-8 h-8 border-l-2 border-t-2 rounded-tl-lg" style={{borderColor: 'rgba(255, 199, 44, 0.5)'}}></div>
+        <div className="absolute -bottom-4 -right-4 w-8 h-8 border-r-2 border-b-2 rounded-br-lg" style={{borderColor: 'rgba(255, 199, 44, 0.5)'}}></div>
       </div>
 
       <style jsx>{`
