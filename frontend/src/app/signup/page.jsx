@@ -15,480 +15,290 @@ import {
 } from "lucide-react";
 
 export default function SignupPage() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [errors, setErrors] = useState({});
+  const [status, setStatus] = useState({ loading: false, error: "", ok: "" });
   const [showPassword, setShowPassword] = useState(false);
-  const [nameFocused, setNameFocused] = useState(false);
-  const [emailFocused, setEmailFocused] = useState(false);
-  const [passwordFocused, setPasswordFocused] = useState(false);
-  const [formErrors, setFormErrors] = useState({});
+  const [focused, setFocused] = useState("");
   const [mounted, setMounted] = useState(false);
   const router = useRouter();
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  useEffect(() => setMounted(true), []);
 
-  const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+  const validators = {
+    name: (v) => (v ? "" : "Full name is required"),
+    email: (v) =>
+      !v ? "Email is required" : /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? "" : "Please enter a valid email",
+    password: (v) => (!v ? "Password is required" : v.length < 6 ? "Password must be at least 6 characters" : ""),
   };
 
-  const validateForm = () => {
-    const errors = {};
-    if (!name) {
-      errors.name = "Full name is required";
-    }
-    if (!email) {
-      errors.email = "Email is required";
-    } else if (!validateEmail(email)) {
-      errors.email = "Please enter a valid email";
-    }
-    if (!password) {
-      errors.password = "Password is required";
-    } else if (password.length < 6) {
-      errors.password = "Password must be at least 6 characters";
-    }
-    setFormErrors(errors);
-    return Object.keys(errors).length === 0;
+  const validateAll = () => {
+    const next = Object.fromEntries(Object.keys(form).map((k) => [k, validators[k](form[k])]));
+    setErrors(next);
+    return !Object.values(next).some(Boolean);
+  };
+
+  const handleChange = (k) => (e) => {
+    setForm((s) => ({ ...s, [k]: e.target.value }));
+    if (errors[k]) setErrors((s) => ({ ...s, [k]: "" }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validateForm()) return;
-    setError("");
-    setSuccess("");
-    setIsLoading(true);
-
+    if (!validateAll()) return;
+    setStatus({ loading: true, error: "", ok: "" });
     try {
       const res = await fetch("http://localhost:5000/api/auth/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password }),
+        body: JSON.stringify(form),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Signup failed");
-      setSuccess("Account created successfully! Redirecting...");
+      setStatus({ loading: false, error: "", ok: "Account created — redirecting..." });
       setTimeout(() => router.push("/login"), 1500);
     } catch (err) {
-      setError(err.message);
-    } finally {
-      setIsLoading(false);
+      setStatus({ loading: false, error: err.message || "Signup failed", ok: "" });
     }
   };
 
   if (!mounted) return null;
 
   return (
-    <div
-      className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-gray-800 flex items-center justify-center p-4 relative overflow-hidden"
-      style={{
-        background:
-          "linear-gradient(135deg, #000000 0%, #292929 50%, #5C5C5C 100%)",
-      }}
-    >
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div
-          className="absolute -top-40 -right-40 w-80 h-80 rounded-full opacity-20 blur-3xl animate-pulse"
-          style={{
-            background: "linear-gradient(45deg, #FFC72C, #FFFFFF)",
-          }}
-        ></div>
-        <div
-          className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full opacity-15 blur-3xl animate-pulse delay-1000"
-          style={{
-            background: "linear-gradient(45deg, #FFC72C, #5C5C5C)",
-          }}
-        ></div>
-      </div>
-
-      <div className="relative w-full max-w-md">
-        {/* Main form container with glassmorphism */}
-        <div
-          className="backdrop-blur-xl border rounded-2xl shadow-2xl p-8 transform transition-all duration-700 hover:scale-[1.02]"
-          style={{
-            backgroundColor: "rgba(41, 41, 41, 0.8)",
-            borderColor: "rgba(255, 199, 44, 0.3)",
-          }}
-        >
-          {/* Header */}
-          <div className="text-center mb-8">
-            <div
-              className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-4 shadow-lg"
-              style={{ backgroundColor: "#FFC72C" }}
-            >
-              <User2 className="text-black" size={24} />
-            </div>
-            <h1 className="text-3xl font-bold text-white mb-2">
-              Create Account
-            </h1>
-            <p style={{ color: "#5C5C5C" }}>Join us and start your journey</p>
+    <div className="page">
+      <div className="bg-orbs" aria-hidden />
+      <div className="card">
+        <div className="head">
+          <div className="logo">
+            <User2 size={22} />
           </div>
-          {/* Status messages */}
-          {error && (
-            <div
-              className="mb-6 p-4 rounded-xl backdrop-blur-sm animate-shake"
-              style={{
-                backgroundColor: "rgba(255, 0, 0, 0.1)",
-                border: "1px solid rgba(255, 0, 0, 0.3)",
-              }}
-            >
-              <div className="flex items-center gap-3">
-                <XCircle className="text-red-400 flex-shrink-0" size={20} />
-                <p className="text-red-200 text-sm">{error}</p>
-              </div>
-            </div>
-          )}
-
-          {success && (
-            <div
-              className="mb-6 p-4 rounded-xl backdrop-blur-sm animate-bounce"
-              style={{
-                backgroundColor: "rgba(255, 199, 44, 0.2)",
-                border: "1px solid #FFC72C",
-              }}
-            >
-              <div className="flex items-center gap-3">
-                <CheckCircle2
-                  style={{ color: "#FFC72C" }}
-                  className="flex-shrink-0"
-                  size={20}
-                />
-                <p className="text-white text-sm">{success}</p>
-              </div>
-            </div>
-          )}
-
-          <form onSubmit={handleSubmit} className="space-y-6" noValidate>
-            {/* Name field */}
-            <div className="space-y-2">
-              <label
-                htmlFor="name"
-                className="block text-sm font-medium text-white"
-              >
-                Full Name
-              </label>
-              <div className="relative group">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <User2
-                    className="transition-colors duration-200"
-                    style={{ color: nameFocused ? "#FFC72C" : "#5C5C5C" }}
-                    size={20}
-                  />
-                </div>
-                <input
-                  id="name"
-                  type="text"
-                  placeholder="Enter your full name"
-                  className="w-full pl-10 pr-4 py-3 rounded-xl text-white transition-all duration-200 focus:outline-none focus:ring-2"
-                  style={{
-                    backgroundColor: "rgba(92, 92, 92, 0.2)",
-                    border: formErrors.name
-                      ? "1px solid red"
-                      : "1px solid rgba(92, 92, 92, 0.5)",
-                  }}
-                  onFocus={(e) => {
-                    setNameFocused(true);
-                    e.target.style.borderColor = "#FFC72C";
-                    e.target.style.boxShadow =
-                      "0 0 0 2px rgba(255, 199, 44, 0.2)";
-                  }}
-                  onBlur={(e) => {
-                    setNameFocused(false);
-                    e.target.style.borderColor = formErrors.name
-                      ? "red"
-                      : "rgba(92, 92, 92, 0.5)";
-                    e.target.style.boxShadow = "none";
-                  }}
-                  value={name}
-                  onChange={(e) => {
-                    setName(e.target.value);
-                    if (formErrors.name) {
-                      setFormErrors((prev) => ({ ...prev, name: "" }));
-                    }
-                  }}
-                  required
-                  aria-describedby={formErrors.name ? "name-error" : undefined}
-                />
-              </div>
-              {formErrors.name && (
-                <p
-                  id="name-error"
-                  className="text-red-400 text-xs mt-1 animate-slideDown"
-                >
-                  {formErrors.name}
-                </p>
-              )}
-            </div>
-            {/* Email field */}
-            <div className="space-y-2">
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-white"
-              >
-                Email Address
-              </label>
-              <div className="relative group">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Mail
-                    className="transition-colors duration-200"
-                    style={{ color: emailFocused ? "#FFC72C" : "#5C5C5C" }}
-                    size={20}
-                  />
-                </div>
-                <input
-                  id="email"
-                  type="email"
-                  placeholder="Enter your email"
-                  className="w-full pl-10 pr-4 py-3 rounded-xl text-white transition-all duration-200 focus:outline-none focus:ring-2"
-                  style={{
-                    backgroundColor: "rgba(92, 92, 92, 0.2)",
-                    border: formErrors.email
-                      ? "1px solid red"
-                      : "1px solid rgba(92, 92, 92, 0.5)",
-                  }}
-                  onFocus={(e) => {
-                    setEmailFocused(true);
-                    e.target.style.borderColor = "#FFC72C";
-                    e.target.style.boxShadow =
-                      "0 0 0 2px rgba(255, 199, 44, 0.2)";
-                  }}
-                  onBlur={(e) => {
-                    setEmailFocused(false);
-                    e.target.style.borderColor = formErrors.email
-                      ? "red"
-                      : "rgba(92, 92, 92, 0.5)";
-                    e.target.style.boxShadow = "none";
-                  }}
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                    if (formErrors.email) {
-                      setFormErrors((prev) => ({ ...prev, email: "" }));
-                    }
-                  }}
-                  required
-                  aria-describedby={formErrors.email ? "email-error" : undefined}
-                />
-              </div>
-              {formErrors.email && (
-                <p
-                  id="email-error"
-                  className="text-red-400 text-xs mt-1 animate-slideDown"
-                >
-                  {formErrors.email}
-                </p>
-              )}
-            </div>
-            {/* Password field */}
-            <div className="space-y-2">
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-white"
-              >
-                Password
-              </label>
-              <div className="relative group">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Lock
-                    className="transition-colors duration-200"
-                    style={{ color: passwordFocused ? "#FFC72C" : "#5C5C5C" }}
-                    size={20}
-                  />
-                </div>
-                <input
-                  id="password"
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Create a strong password"
-                  className="w-full pl-10 pr-12 py-3 rounded-xl text-white transition-all duration-200 focus:outline-none focus:ring-2"
-                  style={{
-                    backgroundColor: "rgba(92, 92, 92, 0.2)",
-                    border: formErrors.password
-                      ? "1px solid red"
-                      : "1px solid rgba(92, 92, 92, 0.5)",
-                  }}
-                  onFocus={(e) => {
-                    setPasswordFocused(true);
-                    e.target.style.borderColor = "#FFC72C";
-                    e.target.style.boxShadow =
-                      "0 0 0 2px rgba(255, 199, 44, 0.2)";
-                  }}
-                  onBlur={(e) => {
-                    setPasswordFocused(false);
-                    e.target.style.borderColor = formErrors.password
-                      ? "red"
-                      : "rgba(92, 92, 92, 0.5)";
-                    e.target.style.boxShadow = "none";
-                  }}
-                  value={password}
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                    if (formErrors.password) {
-                      setFormErrors((prev) => ({ ...prev, password: "" }));
-                    }
-                  }}
-                  required
-                  aria-describedby={
-                    formErrors.password ? "password-error" : undefined
-                  }
-                />
-                <button
-                  type="button"
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center rounded-r-xl transition-colors duration-200"
-                  onClick={() => setShowPassword(!showPassword)}
-                  aria-label={showPassword ? "Hide password" : "Show password"}
-                  onMouseEnter={(e) =>
-                    (e.target.style.backgroundColor = "rgba(92, 92, 92, 0.2)")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.target.style.backgroundColor = "transparent")
-                  }
-                >
-                  {showPassword ? (
-                    <EyeOff
-                      className="transition-colors"
-                      style={{ color: "#5C5C5C" }}
-                      size={20}
-                    />
-                  ) : (
-                    <Eye
-                      className="transition-colors"
-                      style={{ color: "#5C5C5C" }}
-                      size={20}
-                    />
-                  )}
-                </button>
-              </div>
-              {formErrors.password && (
-                <p
-                  id="password-error"
-                  className="text-red-400 text-xs mt-1 animate-slideDown"
-                >
-                  {formErrors.password}
-                </p>
-              )}
-            </div>
-            {/* Submit button */}
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full relative overflow-hidden font-semibold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-[1.02] hover:shadow-lg disabled:hover:scale-100 disabled:hover:shadow-none group"
-              style={{
-                backgroundColor: isLoading ? "#5C5C5C" : "#FFC72C",
-                color: "#000000",
-                boxShadow: isLoading
-                  ? "none"
-                  : "0 4px 15px rgba(255, 199, 44, 0.3)",
-              }}
-              onMouseEnter={(e) => {
-                if (!isLoading) {
-                  e.target.style.backgroundColor = "#e6b428";
-                  e.target.style.boxShadow =
-                    "0 6px 20px rgba(255, 199, 44, 0.4)";
-                }
-              }}
-              onMouseLeave={(e) => {
-                if (!isLoading) {
-                  e.target.style.backgroundColor = "#FFC72C";
-                  e.target.style.boxShadow =
-                    "0 4px 15px rgba(255, 199, 44, 0.3)";
-                }
-              }}
-            >
-              <span className="relative z-10 flex items-center justify-center gap-2">
-                {isLoading ? (
-                  <>
-                    <Loader2 className="animate-spin" size={20} />
-                    Creating Account...
-                  </>
-                ) : (
-                  <>
-                    Create Account
-                    <ArrowRight className="group-hover:translate-x-1 transition-transform duration-200" size={20} />
-                  </>
-                )}
-              </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
-            </button>
-          </form>
-          {/* Footer */}
-          <div className="mt-8 text-center">
-            <p className="text-white text-sm">
-              Already have an account?{" "}
-              <a
-                href="/login"
-                className="font-medium transition-colors duration-200 hover:underline"
-                style={{ color: "#FFC72C" }}
-                onMouseEnter={(e) => (e.target.style.color = "#e6b428")}
-                onMouseLeave={(e) => (e.target.style.color = "#FFC72C")}
-              >
-                Sign In
-              </a>
-            </p>
-          </div>
-          <div className="mt-4 text-center text-xs text-gray-400">
-            By creating an account, you agree to our{" "}
-            <a
-              href="#"
-              className="hover:underline"
-              style={{ color: "#FFC72C" }}
-              onMouseEnter={(e) => (e.target.style.color = "#e6b428")}
-              onMouseLeave={(e) => (e.target.style.color = "#FFC72C")}
-            >
-              Terms of Service
-            </a>{" "}
-            and{" "}
-            <a
-              href="#"
-              className="hover:underline"
-              style={{ color: "#FFC72C" }}
-              onMouseEnter={(e) => (e.target.style.color = "#e6b428")}
-              onMouseLeave={(e) => (e.target.style.color = "#FFC72C")}
-            >
-              Privacy Policy
-            </a>
-            .
-          </div>
+          <h1>Create Account</h1>
+          <p className="muted">Join us and start your journey</p>
         </div>
-        {/* Decorative corners */}
-        <div
-          className="absolute -top-4 -left-4 w-8 h-8 border-l-2 border-t-2 rounded-tl-lg"
-          style={{ borderColor: "rgba(255, 199, 44, 0.5)" }}
-        ></div>
-        <div
-          className="absolute -bottom-4 -right-4 w-8 h-8 border-r-2 border-b-2 rounded-br-lg"
-          style={{ borderColor: "rgba(255, 199, 44, 0.5)" }}
-        ></div>
+
+        {status.error && (
+          <div className="status error">
+            <XCircle size={18} />
+            <span>{status.error}</span>
+          </div>
+        )}
+        {status.ok && (
+          <div className="status success">
+            <CheckCircle2 size={18} />
+            <span>{status.ok}</span>
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} noValidate>
+          <Field
+            id="name"
+            label="Full Name"
+            icon={<User2 size={18} color={focused === "name" ? undefined : undefined} />}
+            value={form.name}
+            focused={focused === "name"}
+            error={errors.name}
+            onFocus={() => setFocused("name")}
+            onBlur={() => setFocused("")}
+            onChange={handleChange("name")}
+            placeholder="Enter your full name"
+          />
+          <Field
+            id="email"
+            label="Email Address"
+            icon={<Mail size={18} />}
+            value={form.email}
+            focused={focused === "email"}
+            error={errors.email}
+            onFocus={() => setFocused("email")}
+            onBlur={() => setFocused("")}
+            onChange={handleChange("email")}
+            placeholder="Enter your email"
+            type="email"
+          />
+          <div className="field">
+            <label htmlFor="password">Password</label>
+            <div className={`input ${errors.password ? "err" : ""} ${focused === "password" ? "focus" : ""}`}>
+              <div className="left-icon">
+                <Lock size={18} />
+              </div>
+              <input
+                id="password"
+                type={showPassword ? "text" : "password"}
+                placeholder="Create a strong password"
+                value={form.password}
+                onChange={handleChange("password")}
+                onFocus={() => setFocused("password")}
+                onBlur={() => setFocused("")}
+                aria-describedby={errors.password ? "password-error" : undefined}
+                required
+              />
+              <button
+                type="button"
+                className="show-btn"
+                onClick={() => setShowPassword((s) => !s)}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+              >
+                {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+              </button>
+            </div>
+            {errors.password && (
+              <p id="password-error" className="err-text">
+                {errors.password}
+              </p>
+            )}
+          </div>
+
+          <button className="submit" type="submit" disabled={status.loading}>
+            {status.loading ? (
+              <>
+                <Loader2 className="spin" size={16} />
+                Creating Account...
+              </>
+            ) : (
+              <>
+                Create Account <ArrowRight size={16} />
+              </>
+            )}
+          </button>
+        </form>
+
+        <div className="footer">
+          <p>
+            Already have an account? <a href="/login">Sign In</a>
+          </p>
+          <p className="tiny">
+            By creating an account you agree to our <a href="#">Terms</a> and <a href="#">Privacy</a>.
+          </p>
+        </div>
       </div>
 
       <style jsx>{`
-        @keyframes shake {
-          0%, 100% { transform: translateX(0); }
-          25% { transform: translateX(-5px); }
-          75% { transform: translateX(5px); }
+        :root {
+          --bg1: #000;
+          --bg2: #292929;
+          --card: rgba(41,41,41,0.8);
+          --accent: #FFC72C;
+          --muted: #5C5C5C;
         }
-        @keyframes slideDown {
-          from {
-            opacity: 0;
-            transform: translateY(-10px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+        .page {
+          min-height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 24px;
+          background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 50%, #5C5C5C 100%);
+          position: relative;
+          overflow: hidden;
         }
-        .animate-shake {
-          animation: shake 0.5s ease-in-out;
+        .bg-orbs {
+          position: absolute;
+          inset: 0;
         }
-        .animate-slideDown {
-          animation: slideDown 0.3s ease-out;
+        .bg-orbs::before,
+        .bg-orbs::after {
+          content: "";
+          position: absolute;
+          width: 320px;
+          height: 320px;
+          border-radius: 999px;
+          filter: blur(40px);
+          opacity: 0.15;
+          animation: pulse 6s infinite;
         }
+        .bg-orbs::before {
+          top: -80px;
+          right: -80px;
+          background: linear-gradient(45deg, var(--accent), #fff);
+        }
+        .bg-orbs::after {
+          bottom: -80px;
+          left: -80px;
+          background: linear-gradient(45deg, var(--accent), #5C5C5C);
+          opacity: 0.12;
+        }
+        @keyframes pulse { 0%,100%{transform:scale(1)}50%{transform:scale(1.05)} }
+
+        .card {
+          width: 100%;
+          max-width: 420px;
+          padding: 28px;
+          border-radius: 16px;
+          background: var(--card);
+          border: 1px solid rgba(255,199,44,0.12);
+          box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+          backdrop-filter: blur(8px);
+          position: relative;
+          z-index: 2;
+        }
+        .head { text-align: center; margin-bottom: 18px; }
+        .logo {
+          width:56px;height:56px;border-radius:999px;background:var(--accent);display:inline-flex;align-items:center;justify-content:center;margin:0 auto 8px;
+        }
+        h1 { color: #fff; margin: 0 0 6px; font-size: 22px; }
+        .muted { color: var(--muted); font-size: 13px; margin: 0; }
+
+        .status { display:flex; gap:8px; align-items:center; padding:10px 12px; border-radius:10px; margin-bottom:12px; font-size:13px; }
+        .status.error { background: rgba(255,0,0,0.08); border:1px solid rgba(255,0,0,0.18); color:#ffcccc; animation: shake .5s; }
+        .status.success { background: rgba(255,199,44,0.12); border:1px solid rgba(255,199,44,0.3); color: #fff; }
+
+        form { display: grid; gap:14px; }
+
+        .field { display:flex; flex-direction:column; gap:6px; }
+        label { color:#fff; font-size:13px; }
+
+        .input { display:flex; align-items:center; background: rgba(92,92,92,0.14); border-radius:12px; padding:8px 10px; gap:8px; border:1px solid rgba(92,92,92,0.5); transition: box-shadow .15s, border-color .15s; }
+        .input.focus { box-shadow: 0 0 0 4px rgba(255,199,44,0.08); border-color: var(--accent); }
+        .input.err { border-color: #f87171; }
+        .left-icon { color: var(--muted); display:flex; align-items:center; justify-content:center; width:30px; flex-shrink:0; }
+        input { background: transparent; border: none; outline: none; color:#fff; width:100%; padding:8px 6px; font-size:14px; }
+        .show-btn { background:transparent; border:none; color:var(--muted); cursor:pointer; padding:6px; display:flex; align-items:center; }
+        .err-text { color:#fb7185; font-size:12px; margin-top:4px; }
+
+        .submit {
+          display:flex; align-items:center; justify-content:center; gap:8px;
+          background: var(--accent); color:#000; font-weight:600; padding:12px; border-radius:12px; border:none; cursor:pointer;
+          box-shadow: 0 8px 24px rgba(255,199,44,0.18); transition: transform .15s, box-shadow .15s, background .15s;
+        }
+        .submit:disabled { opacity:0.9; cursor:not-allowed; transform:none; box-shadow:none; background:#5C5C5C; color:#000; }
+        .submit:hover:not(:disabled){ transform: translateY(-2px); box-shadow: 0 12px 34px rgba(255,199,44,0.24); }
+        .spin { animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes shake { 0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)} }
+
+        .footer { text-align:center; margin-top:12px; color:#fff; font-size:13px; }
+        .footer a { color: var(--accent); text-decoration:none; }
+        .tiny { font-size:11px; color: #9ca3af; margin-top:8px; }
+
+        /* small */
+        @media (max-width:420px){ .card{padding:20px} }
       `}</style>
+    </div>
+  );
+}
+
+function Field({ id, label, icon, value, onChange, onFocus, onBlur, placeholder, focused, error, type = "text" }) {
+  return (
+    <div className="field">
+      <label htmlFor={id}>{label}</label>
+      <div className={`input ${error ? "err" : ""} ${focused ? "focus" : ""}`}>
+        <div className="left-icon">{icon}</div>
+        <input
+          id={id}
+          type={type}
+          value={value}
+          onChange={onChange}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          placeholder={placeholder}
+          aria-describedby={error ? `${id}-err` : undefined}
+          required
+        />
+      </div>
+      {error && (
+        <p id={`${id}-err`} className="err-text">
+          {error}
+        </p>
+      )}
     </div>
   );
 }
