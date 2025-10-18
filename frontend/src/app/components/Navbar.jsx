@@ -32,8 +32,8 @@ const navLink = (link, pathname, extra = "", onClick) => {
       onClick={onClick}
       className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl font-medium transition-all duration-200 ${
         active
-          ? "text-[#FACC15] bg-[#FACC15]/10"
-          : "text-gray-300 hover:text-[#FACC15] hover:bg-[#FACC15]/10"
+          ? "text-[#FDE047] bg-[#FDE047]/10"
+          : "text-gray-300 hover:text-[#FDE047] hover:bg-[#FDE047]/10"
       } ${extra}`}
     >
       <Icon className="h-4 w-4 text-current" />
@@ -54,11 +54,10 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between px-4 sm:px-6 lg:px-8 py-4">
             {/* Logo */}
-            <Link href="/" className="flex items-center space-x-2 group">
-              <div
+            <Link href="/" className="flex items-center space-x-2 group">              <div
                 className="w-10 h-10 rounded-xl flex items-center justify-center group-hover:shadow-lg transition-all duration-300"
                 style={{
-                  background: "linear-gradient(90deg,#0b1220,#FACC15)",
+                  background: "linear-gradient(90deg,#0b1220,#FDE047)",
                 }}
               >
                 <span className="text-black font-bold text-lg">R</span>
@@ -66,7 +65,7 @@ export default function Navbar() {
               <span
                 className="text-2xl font-bold"
                 style={{
-                  background: "linear-gradient(90deg,#0b1220,#FACC15)",
+                  background: "linear-gradient(90deg,#0b1220,#FDE047)",
                   WebkitBackgroundClip: "text",
                   backgroundClip: "text",
                   color: "transparent",
@@ -84,12 +83,11 @@ export default function Navbar() {
                 </div>
                 <input
                   type="text"
-                  placeholder="Search for rentals, locations, or experiences..."
-                  className="w-full pl-12 pr-4 py-3 border rounded-2xl bg-[#0b1220] text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FACC15] transition-all duration-200"
+                  placeholder="Search for rentals, locations, or experiences..."                  className="w-full pl-12 pr-4 py-3 border rounded-2xl bg-[#0b1220] text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FDE047] transition-all duration-200"
                   style={{ borderColor: "rgba(255,255,255,0.04)" }}
                 />
                 <button className="absolute inset-y-0 right-0 pr-3 flex items-center">
-                  <div className="bg-[#FACC15] hover:bg-[#e0b21a] text-black p-2 rounded-xl transition-colors duration-200">
+                  <div className="bg-[#FDE047] hover:bg-[#FCD34D] text-black p-2 rounded-xl transition-colors duration-200">
                     <Search className="h-4 w-4" />
                   </div>
                 </button>
@@ -102,17 +100,16 @@ export default function Navbar() {
             </div>
 
             {/* Right side - Desktop */}
-            <div className="hidden lg:flex items-center space-x-3">
-              <button className="relative p-2.5 text-gray-300 hover:text-[#FACC15] hover:bg-[#FACC15]/10 rounded-xl transition-all duration-200">
+            <div className="hidden lg:flex items-center space-x-3">              <button className="relative p-2.5 text-gray-300 hover:text-[#FDE047] hover:bg-[#FDE047]/10 rounded-xl transition-all duration-200">
                 <Bell className="h-5 w-5" />
-                <span className="absolute -top-1 -right-1 h-3 w-3 bg-[#FACC15] rounded-full border border-[#071022]"></span>
+                <span className="absolute -top-1 -right-1 h-3 w-3 bg-[#FDE047] rounded-full border border-[#071022]"></span>
               </button>
               <Link
                 href="/wishlist"
-                className="relative p-2.5 text-gray-300 hover:text-[#FACC15] hover:bg-[#FACC15]/10 rounded-xl transition-all duration-200"
+                className="relative p-2.5 text-gray-300 hover:text-[#FDE047] hover:bg-[#FDE047]/10 rounded-xl transition-all duration-200"
               >
                 <Heart className="h-5 w-5" />
-                <span className="absolute -top-1 -right-1 h-4 w-4 bg-[#FACC15] text-black text-xs rounded-full flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 h-4 w-4 bg-[#FDE047] text-black text-xs rounded-full flex items-center justify-center">
                   3
                 </span>
               </Link>
@@ -124,11 +121,10 @@ export default function Navbar() {
                 >
                   <div className="p-1">
                     <Menu className="h-4 w-4 text-gray-300" />
-                  </div>
-                  <div
+                  </div>                  <div
                     className="w-8 h-8 rounded-full flex items-center justify-center"
                     style={{
-                      background: "linear-gradient(90deg,#0b1220,#FACC15)",
+                      background: "linear-gradient(90deg,#0b1220,#FDE047)",
                     }}
                   >
                     <User className="h-4 w-4 text-black" />
@@ -138,10 +134,9 @@ export default function Navbar() {
                   <div
                     className="absolute right-0 mt-2 w-56 bg-[#0b1220] rounded-2xl shadow-xl border py-2 z-50"
                     style={{ borderColor: "rgba(255,255,255,0.04)" }}
-                  >
-                    <Link
+                  >                    <Link
                       href="/profile"
-                      className="block px-4 py-3 text-gray-100 hover:bg-[#FACC15]/5 transition-colors duration-150"
+                      className="block px-4 py-3 text-gray-100 hover:bg-[#FDE047]/5 transition-colors duration-150"
                     >
                       <div className="flex items-center space-x-3">
                         <User className="h-4 w-4" />
@@ -150,7 +145,7 @@ export default function Navbar() {
                     </Link>
                     <Link
                       href="/my-rentals"
-                      className="block px-4 py-3 text-gray-100 hover:bg-[#FACC15]/5 transition-colors duration-150"
+                      className="block px-4 py-3 text-gray-100 hover:bg-[#FDE047]/5 transition-colors duration-150"
                     >
                       <div className="flex items-center space-x-3">
                         <ShoppingBag className="h-4 w-4" />
@@ -159,7 +154,7 @@ export default function Navbar() {
                     </Link>
                     <Link
                       href="/settings"
-                      className="block px-4 py-3 text-gray-100 hover:bg-[#FACC15]/5 transition-colors duration-150"
+                      className="block px-4 py-3 text-gray-100 hover:bg-[#FDE047]/5 transition-colors duration-150"
                     >
                       <div className="flex items-center space-x-3">
                         <Settings className="h-4 w-4" />
@@ -169,7 +164,7 @@ export default function Navbar() {
                     <hr className="my-2 border-white/5" />
                     <Link
                       href="/login"
-                      className="block px-4 py-3 text-gray-100 hover:bg-[#FACC15]/5 transition-colors duration-150"
+                      className="block px-4 py-3 text-gray-100 hover:bg-[#FDE047]/5 transition-colors duration-150"
                     >
                       Login / Sign up
                     </Link>
@@ -179,16 +174,15 @@ export default function Navbar() {
             </div>
 
             {/* Mobile Search & Menu Button */}
-            <div className="flex items-center space-x-2 lg:hidden">
-              <button
+            <div className="flex items-center space-x-2 lg:hidden">              <button
                 onClick={() => setSearchOpen(!searchOpen)}
-                className="p-2.5 text-gray-300 hover:text-[#FACC15] hover:bg-[#FACC15]/10 rounded-xl transition-all duration-200"
+                className="p-2.5 text-gray-300 hover:text-[#FDE047] hover:bg-[#FDE047]/10 rounded-xl transition-all duration-200"
               >
                 <Search className="h-5 w-5" />
               </button>
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
-                className="p-2.5 text-gray-300 hover:text-[#FACC15] hover:bg-[#FACC15]/10 rounded-xl transition-all duration-200"
+                className="p-2.5 text-gray-300 hover:text-[#FDE047] hover:bg-[#FDE047]/10 rounded-xl transition-all duration-200"
               >
                 {menuOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
@@ -208,7 +202,7 @@ export default function Navbar() {
                 <input
                   type="text"
                   placeholder="Search rentals..."
-                  className="w-full pl-12 pr-4 py-3 border rounded-2xl bg-[#0b1220] text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FACC15] transition-all duration-200"
+                  className="w-full pl-12 pr-4 py-3 border rounded-2xl bg-[#0b1220] text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FDE047] transition-all duration-200"
                   style={{ borderColor: "rgba(255,255,255,0.04)" }}
                 />
               </div>
@@ -242,20 +236,18 @@ export default function Navbar() {
               <div
                 className="flex items-center space-x-3 p-4 rounded-2xl mb-6"
                 style={{ border: "1px solid rgba(255,255,255,0.04)" }}
-              >
-                <div
+              >                <div
                   className="w-12 h-12 rounded-full flex items-center justify-center"
                   style={{
-                    background: "linear-gradient(90deg,#0b1220,#FACC15)",
+                    background: "linear-gradient(90deg,#0b1220,#FDE047)",
                   }}
                 >
                   <User className="h-6 w-6 text-black" />
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-100">Welcome!</p>
-                  <Link
+                  <p className="font-semibold text-gray-100">Welcome!</p>                  <Link
                     href="/login"
-                    className="text-sm text-[#FACC15] hover:text-[#e0b21a]"
+                    className="text-sm text-[#FDE047] hover:text-[#FCD34D]"
                     onClick={() => setMenuOpen(false)}
                   >
                     Login / Sign up
@@ -271,19 +263,18 @@ export default function Navbar() {
                 )}
               </div>
 
-              <div className="mt-8 pt-6 border-t" style={{ borderColor: "rgba(255,255,255,0.04)" }}>
-                <Link
+              <div className="mt-8 pt-6 border-t" style={{ borderColor: "rgba(255,255,255,0.04)" }}>                <Link
                   href="/wishlist"
-                  className="flex items-center space-x-3 p-4 rounded-2xl text-gray-100 hover:text-[#FACC15] hover:bg-[#FACC15]/10 transition-all duration-200"
+                  className="flex items-center space-x-3 p-4 rounded-2xl text-gray-100 hover:text-[#FDE047] hover:bg-[#FDE047]/10 transition-all duration-200"
                   onClick={() => setMenuOpen(false)}
                 >
                   <Heart className="h-5 w-5" />
                   <span className="font-medium">Wishlist</span>
-                  <span className="ml-auto bg-[#FACC15] text-black text-xs px-2 py-1 rounded-full">3</span>
+                  <span className="ml-auto bg-[#FDE047] text-black text-xs px-2 py-1 rounded-full">3</span>
                 </Link>
                 <Link
                   href="/notifications"
-                  className="flex items-center space-x-3 p-4 rounded-2xl text-gray-100 hover:text-[#FACC15] hover:bg-[#FACC15]/10 transition-all duration-200"
+                  className="flex items-center space-x-3 p-4 rounded-2xl text-gray-100 hover:text-[#FDE047] hover:bg-[#FDE047]/10 transition-all duration-200"
                   onClick={() => setMenuOpen(false)}
                 >
                   <Bell className="h-5 w-5" />
@@ -291,7 +282,7 @@ export default function Navbar() {
                 </Link>
                 <Link
                   href="/settings"
-                  className="flex items-center space-x-3 p-4 rounded-2xl text-gray-100 hover:text-[#FACC15] hover:bg-[#FACC15]/10 transition-all duration-200"
+                  className="flex items-center space-x-3 p-4 rounded-2xl text-gray-100 hover:text-[#FDE047] hover:bg-[#FDE047]/10 transition-all duration-200"
                   onClick={() => setMenuOpen(false)}
                 >
                   <Settings className="h-5 w-5" />
