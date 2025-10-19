@@ -76,7 +76,7 @@ export default function Navbar() {
         }
       `}</style>
       
-      <nav className="sticky top-0 z-50 bg-gradient-to-br from-slate-900/95 via-slate-800/90 to-slate-800/95 backdrop-blur-xl shadow-2xl border-b border-[#FDE047]/30 overflow-hidden">
+      <nav className="sticky top-0 z-50 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-800 backdrop-blur-xl shadow-2xl border-b border-[#FDE047]/30 overflow-visible">
         {/* Enhanced animated gradient overlays */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#FDE047]/12 via-[#F59E0B]/8 to-[#FDE047]/12 animate-pulse"></div>
         <div className="absolute inset-0 bg-gradient-to-l from-transparent via-[#FDE047]/6 to-transparent animate-pulse" style={{ animationDelay: "1.5s" }}></div>
@@ -186,126 +186,127 @@ export default function Navbar() {
               </button>
               
               {/* Wishlist */}
-              <Link
-                href="/wishlist"
-                className="relative p-3 text-gray-300 hover:text-[#FDE047] hover:bg-gradient-to-r hover:from-[#FDE047]/10 hover:to-[#F59E0B]/5 rounded-xl transition-all duration-300 hover:scale-105 group"
-              >
-                <Heart className="h-5 w-5" />
-                <span className="absolute -top-1 -right-1 h-5 w-5 bg-gradient-to-r from-[#FDE047] to-[#F59E0B] text-black text-xs rounded-full flex items-center justify-center font-bold shadow-lg">
-                  3
-                </span>
-              </Link>
-              
-              {/* Profile Dropdown */}
-              <div className="relative">
-                <button
-                  onClick={() => setProfileDropdown(!profileDropdown)}
-                  className="flex items-center space-x-3 p-2 border border-white/10 rounded-2xl hover:border-[#FDE047]/30 transition-all duration-300 hover:shadow-lg hover:shadow-[#FDE047]/10 group"
-                  style={{ background: "linear-gradient(135deg, rgba(253, 224, 71, 0.05) 0%, rgba(245, 158, 11, 0.05) 100%)" }}
-                >
-                  <div className="p-1.5">
-                    <Menu className="h-4 w-4 text-gray-300 group-hover:text-[#FDE047] transition-colors duration-200" />
-                  </div>
-                  <div
-                    className="w-9 h-9 rounded-full flex items-center justify-center shadow-lg"
-                    style={{
-                      background: "linear-gradient(135deg, #FDE047 0%, #F59E0B 100%)",
-                    }}
-                  >
-                    <User className="h-4 w-4 text-black" />
-                  </div>
-                </button>
-                
-                {profileDropdown && (
-                  <div
-                    className="absolute right-0 mt-3 w-64 bg-gradient-to-br from-[#0b0b0d] to-[#141214] rounded-2xl shadow-2xl border border-white/10 py-3 z-50 backdrop-blur-xl"
-                    style={{ 
-                      boxShadow: "0 20px 40px rgba(0,0,0,0.3), 0 0 0 1px rgba(253, 224, 71, 0.1)"
-                    }}
-                  >
-                    <Link
-                      href="/profile"
-                      className="block px-5 py-3 text-gray-100 hover:bg-gradient-to-r hover:from-[#FDE047]/10 hover:to-[#F59E0B]/5 transition-all duration-200 hover:text-[#FDE047]"
-                    >
-                      <div className="flex items-center space-x-3">
-                        <User className="h-4 w-4" />
-                        <span>Profile</span>
-                      </div>
-                    </Link>
-                    <Link
-                      href="/my-rentals"
-                      className="block px-5 py-3 text-gray-100 hover:bg-gradient-to-r hover:from-[#FDE047]/10 hover:to-[#F59E0B]/5 transition-all duration-200 hover:text-[#FDE047]"
-                    >
-                      <div className="flex items-center space-x-3">
-                        <ShoppingBag className="h-4 w-4" />
-                        <span>My Rentals</span>
-                      </div>
-                    </Link>
-                    <Link
-                      href="/settings"
-                      className="block px-5 py-3 text-gray-100 hover:bg-gradient-to-r hover:from-[#FDE047]/10 hover:to-[#F59E0B]/5 transition-all duration-200 hover:text-[#FDE047]"
-                    >
-                      <div className="flex items-center space-x-3">
-                        <Settings className="h-4 w-4" />
-                        <span>Settings</span>
-                      </div>
-                    </Link>
-                    <hr className="my-3 border-white/10" />
-                    <Link
-                      href="/login"
-                      className="block px-5 py-3 text-gray-100 hover:bg-gradient-to-r hover:from-[#FDE047]/10 hover:to-[#F59E0B]/5 transition-all duration-200 hover:text-[#FDE047] font-medium"
-                    >
-                      Login / Sign up
-                    </Link>
-                  </div>
-                )}
-              </div>
-            </div>
+                      <Link
+                      href="/wishlist"
+                      className="relative p-3 text-gray-300 hover:text-[#FDE047] hover:bg-gradient-to-r hover:from-[#FDE047]/10 hover:to-[#F59E0B]/5 rounded-xl transition-all duration-300 hover:scale-105 group"
+                      >
+                      <Heart className="h-5 w-5" />
+                      <span className="absolute -top-1 -right-1 h-5 w-5 bg-gradient-to-r from-[#FDE047] to-[#F59E0B] text-black text-xs rounded-full flex items-center justify-center font-bold shadow-lg">
+                        3
+                      </span>
+                      </Link>
 
-            {/* Enhanced Mobile Search & Menu Button */}
-            <div className="flex items-center space-x-3 lg:hidden">
-              <button
-                onClick={() => setSearchOpen(!searchOpen)}
-                className="p-3 text-gray-300 hover:text-[#FDE047] hover:bg-gradient-to-r hover:from-[#FDE047]/10 hover:to-[#F59E0B]/5 rounded-xl transition-all duration-300 hover:scale-105"
-              >
-                <Search className="h-5 w-5" />
-              </button>
-              <button
-                onClick={() => setMenuOpen(!menuOpen)}
-                className="p-3 text-gray-300 hover:text-[#FDE047] hover:bg-gradient-to-r hover:from-[#FDE047]/10 hover:to-[#F59E0B]/5 rounded-xl transition-all duration-300 hover:scale-105"
-              >
-                {menuOpen ? <X size={20} /> : <Menu size={20} />}
-              </button>
-            </div>
-          </div>
+                      {/* Profile Dropdown */}
+                      <div className="relative">
+                      <button
+                        onClick={() => setProfileDropdown(!profileDropdown)}
+                        className="p-2 border border-white/10 rounded-full hover:border-[#FDE047]/30 transition-all duration-300 hover:shadow-lg hover:shadow-[#FDE047]/10"
+                        style={{
+                        background: "linear-gradient(135deg, rgba(253, 224, 71, 0.05) 0%, rgba(245, 158, 11, 0.05) 100%)",
+                        }}
+                        aria-haspopup="true"
+                        aria-expanded={profileDropdown}
+                      >
+                        <div
+                        className="w-9 h-9 rounded-full flex items-center justify-center shadow-lg"
+                        style={{
+                          background: "linear-gradient(135deg, #FDE047 0%, #F59E0B 100%)",
+                        }}
+                        >
+                        <User className="h-4 w-4 text-black" />
+                        </div>
+                      </button>
 
-          {/* Enhanced Mobile Search Bar */}
-          {searchOpen && (
-            <div
-              className="lg:hidden px-4 pb-5 border-t border-white/10"
-              style={{ 
-                background: "linear-gradient(135deg, rgba(253, 224, 71, 0.02) 0%, rgba(245, 158, 11, 0.02) 100%)"
-              }}
-            >
-              <div className="relative mt-4">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <Search className="h-5 w-5 text-gray-400" />
-                </div>
-                <input
-                  type="text"
-                  placeholder="Search rentals..."
-                  className="w-full pl-12 pr-4 py-4 border border-white/10 rounded-2xl bg-gradient-to-r from-[#0b0b0d]/80 to-[#141214]/80 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FDE047]/50 focus:border-[#FDE047]/30 transition-all duration-300"
-                  style={{ 
-                    boxShadow: "inset 0 2px 10px rgba(0,0,0,0.1)"
-                  }}
-                />
-              </div>
-            </div>
-          )}
-        </div>
-      </nav>
+                      {profileDropdown && (
+                        <div
+                        className="absolute right-0 mt-3 w-64 bg-gradient-to-br from-[#0b0b0d] to-[#141214] rounded-2xl shadow-2xl border border-white/10 py-3 z-50 backdrop-blur-xl"
+                        style={{
+                          boxShadow: "0 20px 40px rgba(0,0,0,0.3), 0 0 0 1px rgba(253, 224, 71, 0.1)",
+                        }}
+                        onClick={(e) => e.stopPropagation()}
+                        >
+                        <Link
+                          href="/profile"
+                          onClick={() => setProfileDropdown(false)}
+                          className="block px-5 py-3 text-gray-100 hover:bg-gradient-to-r hover:from-[#FDE047]/10 hover:to-[#F59E0B]/5 transition-all duration-200 hover:text-[#FDE047]"
+                        >
+                          <div className="flex items-center space-x-3">
+                          <User className="h-4 w-4" />
+                          <span>Profile</span>
+                          </div>
+                        </Link>
+                        <Link
+                          href="/my-rentals"
+                          className="block px-5 py-3 text-gray-100 hover:bg-gradient-to-r hover:from-[#FDE047]/10 hover:to-[#F59E0B]/5 transition-all duration-200 hover:text-[#FDE047]"
+                        >
+                          <div className="flex items-center space-x-3">
+                          <ShoppingBag className="h-4 w-4" />
+                          <span>My Rentals</span>
+                          </div>
+                        </Link>
+                        <Link
+                          href="/settings"
+                          className="block px-5 py-3 text-gray-100 hover:bg-gradient-to-r hover:from-[#FDE047]/10 hover:to-[#F59E0B]/5 transition-all duration-200 hover:text-[#FDE047]"
+                        >
+                          <div className="flex items-center space-x-3">
+                          <Settings className="h-4 w-4" />
+                          <span>Settings</span>
+                          </div>
+                        </Link>
+                        <hr className="my-3 border-white/10" />
+                        <Link
+                          href="/login"
+                          className="block px-5 py-3 text-gray-100 hover:bg-gradient-to-r hover:from-[#FDE047]/10 hover:to-[#F59E0B]/5 transition-all duration-200 hover:text-[#FDE047] font-medium"
+                        >
+                          Login / Sign up
+                        </Link>
+                        </div>
+                      )}
+                      </div>
+                    <div className="flex items-center space-x-3 lg:hidden">
+                      <button
+                      onClick={() => setSearchOpen(!searchOpen)}
+                      className="p-3 text-gray-300 hover:text-[#FDE047] hover:bg-gradient-to-r hover:from-[#FDE047]/10 hover:to-[#F59E0B]/5 rounded-xl transition-all duration-300 hover:scale-105"
+                      >
+                      <Search className="h-5 w-5" />
+                      </button>
+                      <button
+                      onClick={() => setMenuOpen(!menuOpen)}
+                      className="p-3 text-gray-300 hover:text-[#FDE047] hover:bg-gradient-to-r hover:from-[#FDE047]/10 hover:to-[#F59E0B]/5 rounded-xl transition-all duration-300 hover:scale-105"
+                      >
+                      {menuOpen ? <X size={20} /> : <Menu size={20} />}
+                      </button>
+                    </div>
+                    </div>
+                    </div>
 
-      {/* Enhanced Mobile Menu Overlay */}
+                    {/* Enhanced Mobile Search Bar */}
+                    {searchOpen && (
+                    <div
+                      className="lg:hidden px-4 pb-5 border-t border-white/10"
+                      style={{ 
+                      background: "linear-gradient(135deg, rgba(253, 224, 71, 0.02) 0%, rgba(245, 158, 11, 0.02) 100%)"
+                      }}
+                    >
+                      <div className="relative mt-4">
+                      <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <Search className="h-5 w-5 text-gray-400" />
+                      </div>
+                      <input
+                        type="text"
+                        placeholder="Search rentals..."
+                        className="w-full pl-12 pr-4 py-4 border border-white/10 rounded-2xl bg-gradient-to-r from-[#0b0b0d]/80 to-[#141214]/80 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FDE047]/50 focus:border-[#FDE047]/30 transition-all duration-300"
+                        style={{ 
+                        boxShadow: "inset 0 2px 10px rgba(0,0,0,0.1)"
+                        }}
+                      />
+                      </div>
+                    </div>
+                    )}
+                  </div>
+                  </nav>
+
+                  {/* Enhanced Mobile Menu Overlay */}
       {menuOpen && (
         <div
           className="lg:hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-sm"
