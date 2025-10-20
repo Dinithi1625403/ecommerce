@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import {
   Eye,
   EyeOff,
@@ -65,7 +66,7 @@ export default function SignupPage() {
   if (!mounted) return null;
 
   return (
-    <div className="page">
+    <><div className="page">
       <div className="bg-orbs" aria-hidden />
       <div className="card">
         <div className="head">
@@ -100,8 +101,7 @@ export default function SignupPage() {
             onFocus={() => setFocused("name")}
             onBlur={() => setFocused("")}
             onChange={handleChange("name")}
-            placeholder="Enter your full name"
-          />
+            placeholder="Enter your full name" />
           <Field
             id="email"
             label="Email Address"
@@ -113,8 +113,8 @@ export default function SignupPage() {
             onBlur={() => setFocused("")}
             onChange={handleChange("email")}
             placeholder="Enter your email"
-            type="email"
-          />
+            type="email" />
+
           <div className="field">
             <label htmlFor="password">Password</label>
             <div className={`input ${errors.password ? "err" : ""} ${focused === "password" ? "focus" : ""}`}>
@@ -129,9 +129,8 @@ export default function SignupPage() {
                 onChange={handleChange("password")}
                 onFocus={() => setFocused("password")}
                 onBlur={() => setFocused("")}
-                aria-describedby={errors.password ? "password-error" : undefined}
-                required
-              />
+                aria-describedby={errors.password ? "password-err" : undefined}
+                required />
               <button
                 type="button"
                 className="show-btn"
@@ -142,7 +141,7 @@ export default function SignupPage() {
               </button>
             </div>
             {errors.password && (
-              <p id="password-error" className="err-text">
+              <p id="password-err" className="err-text">
                 {errors.password}
               </p>
             )}
@@ -161,18 +160,16 @@ export default function SignupPage() {
             )}
           </button>
         </form>
-
         <div className="footer">
           <p>
-            Already have an account? <a href="/login">Sign In</a>
+            Already have an account? <Link href="/login">Sign In</Link>
           </p>
           <p className="tiny">
             By creating an account you agree to our <a href="#">Terms</a> and <a href="#">Privacy</a>.
           </p>
         </div>
       </div>
-
-      <style jsx>{`
+    </div><style jsx>{`
         :root {
           --bg1: #000;
           --bg2: #292929;
@@ -271,8 +268,7 @@ export default function SignupPage() {
 
         /* small */
         @media (max-width:420px){ .card{padding:20px} }
-      `}</style>
-    </div>
+      `}</style></>
   );
 }
 
