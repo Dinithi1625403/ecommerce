@@ -12,7 +12,7 @@ export default function LayoutClient({ children }) {
   return (
     <>
       {!hideLayout && <Navbar />}
-      <main className={`${!hideLayout ? "min-h-[80vh] p-6" : ""}`}>
+      <main className={`${!hideLayout ? "min-h-[80vh]" : ""}`}>
         {children}
       </main>
       {!hideLayout && <Footer />}
