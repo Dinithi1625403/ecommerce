@@ -151,95 +151,137 @@ export default function ProfilePage() {
       </div>
     </div>
   );  return (
-    <div className="min-h-screen bg-gradient-to-br from-[#1a1a1a] via-[#292929] to-[#000000]">
+    <div className="min-h-screen bg-gradient-to-br from-[#000000] via-[#1a1a1a] to-[#292929]">
       {/* Animated Background Pattern */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-[#FFC72C] rounded-full mix-blend-soft-light filter blur-3xl opacity-20 animate-blob"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-[#FFC72C] rounded-full mix-blend-soft-light filter blur-3xl opacity-15 animate-blob animation-delay-2000"></div>
-        <div className="absolute top-40 left-1/2 w-80 h-80 bg-[#FFC72C]/60 rounded-full mix-blend-soft-light filter blur-3xl opacity-10 animate-blob animation-delay-4000"></div>
-      </div>
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">        {/* Profile Header Card */}
-        <div className="bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden mb-8 border-2 border-[#FFC72C]/30 hover:border-[#FFC72C] transition-all duration-300">
+        <div className="absolute -top-40 -right-40 w-96 h-96 bg-[#FFC72C] rounded-full mix-blend-screen filter blur-3xl opacity-10 animate-blob"></div>
+        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-[#FFC72C] rounded-full mix-blend-screen filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#FFD700] rounded-full mix-blend-screen filter blur-3xl opacity-5 animate-blob animation-delay-4000"></div>
+      </div>      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">        {/* Profile Header Card */}
+        <div className="bg-white/5 backdrop-blur-2xl rounded-3xl shadow-2xl overflow-hidden mb-6 border border-[#FFC72C]/20 hover:border-[#FFC72C]/40 transition-all duration-300 hover:shadow-[#FFC72C]/10">
           {/* Gradient Header */}
-          <div className="relative bg-gradient-to-r from-[#FFC72C] via-[#FFD700] to-[#FFC72C] px-8 py-8 overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-r from-[#FFC72C]/90 via-[#FFD700]/90 to-[#FFC72C]/90"></div>
-            <div className="absolute inset-0 opacity-20">
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer"></div>
+          <div className="relative bg-gradient-to-r from-[#1a1a1a] via-[#292929] to-[#1a1a1a] px-6 py-8 overflow-hidden">
+            {/* Animated Background Elements */}
+            <div className="absolute inset-0">
+              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#FFC72C]/10 via-transparent to-[#FFD700]/10"></div>
+              <div className="absolute top-0 right-0 w-96 h-96 bg-[#FFC72C]/20 rounded-full blur-3xl animate-pulse"></div>
+              <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#FFD700]/20 rounded-full blur-3xl animate-pulse animation-delay-2000"></div>
             </div>
-            <div className="relative flex items-center justify-between">
-              <div className="flex items-center space-x-6">                <div className="relative group">
-                  <div className="absolute -inset-2 bg-gradient-to-r from-[#FFC72C]/30 to-[#FFC72C]/10 rounded-full blur-xl opacity-75 group-hover:opacity-100 transition duration-500 animate-pulse-slow"></div>
-                  {profilePic && !(profilePic instanceof File) ? (
-                    <img 
-                      src={profilePic} 
-                      alt="Profile" 
-                      className="relative w-28 h-28 rounded-full border-4 border-white shadow-2xl object-cover ring-4 ring-[#FFC72C]/40 group-hover:ring-[#FFC72C]/60 transition-all duration-300 group-hover:scale-105" 
-                    />
-                  ) : (
-                    <div className="relative w-28 h-28 rounded-full border-4 border-white shadow-2xl bg-gradient-to-br from-white to-[#FFC72C]/20 flex items-center justify-center ring-4 ring-[#FFC72C]/40 group-hover:ring-[#FFC72C]/60 transition-all duration-300 group-hover:scale-105">
-                      <UserIcon className="w-16 h-16 text-[#FFC72C]" />
+            
+            {/* Geometric Pattern Overlay */}
+            <div className="absolute inset-0 opacity-5">
+              <div className="absolute inset-0" style={{
+                backgroundImage: `repeating-linear-gradient(45deg, #FFC72C 0px, #FFC72C 2px, transparent 2px, transparent 10px)`,
+              }}></div>
+            </div>            <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+              <div className="flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-6">
+                {/* Enhanced Profile Picture */}
+                <div className="relative group">
+                  {/* Outer Glow Ring */}
+                  <div className="absolute -inset-3 bg-gradient-to-r from-[#FFC72C] via-[#FFD700] to-[#FFC72C] rounded-full opacity-75 blur-xl group-hover:opacity-100 animate-pulse transition duration-500"></div>
+                  
+                  {/* Middle Ring */}
+                  <div className="absolute -inset-1.5 bg-gradient-to-r from-[#FFC72C] to-[#FFD700] rounded-full opacity-50 blur-md"></div>
+                  
+                  {/* Profile Image Container */}
+                  <div className="relative">
+                    {profilePic && !(profilePic instanceof File) ? (
+                      <img 
+                        src={profilePic} 
+                        alt="Profile" 
+                        className="relative w-28 h-28 rounded-full border-4 border-[#FFC72C] shadow-2xl object-cover ring-4 ring-[#FFD700]/50 group-hover:ring-[#FFC72C] transition-all duration-300 group-hover:scale-105" 
+                      />
+                    ) : (
+                      <div className="relative w-28 h-28 rounded-full border-4 border-[#FFC72C] shadow-2xl bg-gradient-to-br from-[#FFD700] to-[#FFC72C] flex items-center justify-center ring-4 ring-[#FFD700]/50 group-hover:ring-[#FFC72C] transition-all duration-300 group-hover:scale-105">
+                        <UserIcon className="w-16 h-16 text-[#292929]" strokeWidth={2.5} />
+                      </div>
+                    )}
+                    
+                    {/* Status Indicator */}
+                    <div className="absolute -bottom-1 -right-1 bg-gradient-to-r from-[#FFC72C] to-[#FFD700] w-9 h-9 rounded-full border-4 border-[#1a1a1a] shadow-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <div className="relative w-full h-full flex items-center justify-center">
+                        <div className="w-3 h-3 bg-white rounded-full animate-ping absolute"></div>
+                        <div className="w-2 h-2 bg-white rounded-full relative z-10"></div>
+                      </div>
                     </div>
-                  )}
-                  <div className="absolute -bottom-1 -right-1 bg-[#FFC72C] w-7 h-7 rounded-full border-3 border-white shadow-lg flex items-center justify-center">
-                    <div className="w-3 h-3 bg-white rounded-full animate-ping"></div>
-                    <div className="absolute w-2 h-2 bg-[#FFC72C] rounded-full"></div>
+
+                    {/* Sparkle Effect */}
+                    <div className="absolute -top-1 -right-1 w-5 h-5">
+                      <div className="absolute inset-0 bg-[#FFC72C] rounded-full animate-ping opacity-75"></div>
+                      <div className="absolute inset-0 bg-[#FFD700] rounded-full"></div>
+                    </div>
                   </div>
                 </div>
-                <div className="text-[#292929]">
-                  <div className="flex items-center space-x-3 mb-1">
-                    <h1 className="text-4xl font-bold bg-gradient-to-r from-[#292929] to-[#5C5C5C] bg-clip-text text-transparent">{user.name}</h1>
-                    <div className="flex items-center bg-white/30 backdrop-blur-sm px-3 py-1 rounded-full border border-white/50 hover:bg-white/40 transition-all duration-300">
-                      <ShieldCheckIcon className="w-4 h-4 mr-1 text-[#292929]" />
-                      <span className="text-xs font-medium uppercase tracking-wide text-[#292929]">{user.role}</span>
+
+                {/* User Info */}
+                <div className="text-center md:text-left flex-1">
+                  <div className="flex flex-col md:flex-row md:items-center gap-2 mb-3">
+                    <h1 className="text-4xl font-bold bg-gradient-to-r from-white via-[#FFC72C] to-[#FFD700] bg-clip-text text-transparent drop-shadow-lg">{user.name}</h1>
+                    <div className="flex items-center justify-center md:justify-start gap-2">
+                      <div className="flex items-center bg-gradient-to-r from-[#FFC72C] to-[#FFD700] px-3 py-1.5 rounded-full shadow-lg hover:shadow-[#FFC72C]/50 transition-all duration-300 group hover:scale-105">
+                        <ShieldCheckIcon className="w-4 h-4 mr-1 text-[#292929] group-hover:rotate-12 transition-transform duration-300" strokeWidth={2.5} />
+                        <span className="text-xs font-bold uppercase tracking-wider text-[#292929]">{user.role}</span>
+                      </div>
                     </div>
                   </div>
-                  <div className="flex items-center space-x-6 text-[#292929]/80">
-                    <div className="flex items-center space-x-1 group hover:scale-105 transition-transform duration-200">
+                  
+                  {/* Stats Badges */}
+                  <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 mb-3">
+                    <div className="flex items-center space-x-1 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-[#FFC72C]/30 hover:border-[#FFC72C] hover:bg-white/20 transition-all duration-200 group">
                       {[1,2,3,4].map((i) => (
-                        <StarIconSolid key={i} className="w-5 h-5 text-[#FFC72C] fill-[#FFC72C] group-hover:animate-pulse" />
+                        <StarIconSolid key={i} className="w-3.5 h-3.5 text-[#FFC72C] fill-[#FFC72C] group-hover:scale-110 transition-transform" />
                       ))}
-                      <StarIcon className="w-5 h-5 text-[#292929]" />
-                      <span className="text-sm font-medium text-[#292929] ml-1">4.8</span>
+                      <StarIcon className="w-3.5 h-3.5 text-[#5C5C5C]" />
+                      <span className="text-xs font-bold text-white ml-1.5">4.8</span>
                     </div>
-                    <div className="flex items-center space-x-1 hover:text-[#292929] transition-colors duration-200">
-                      <CalendarIcon className="w-4 h-4" />
-                      <span className="text-sm">Since {new Date(user.createdAt || Date.now()).getFullYear()}</span>
+                    <div className="flex items-center space-x-1.5 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-[#FFC72C]/30 hover:border-[#FFC72C] hover:bg-white/20 transition-all duration-200">
+                      <CalendarIcon className="w-3.5 h-3.5 text-[#FFC72C]" />
+                      <span className="text-xs font-semibold text-white">Since {new Date(user.createdAt || Date.now()).getFullYear()}</span>
                     </div>
+                  </div>
+
+                  {/* Email Badge */}
+                  <div className="flex items-center justify-center md:justify-start space-x-1.5 text-[#5C5C5C] group cursor-pointer">
+                    <svg className="w-3.5 h-3.5 text-[#FFC72C] group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                    <span className="text-xs group-hover:text-white transition-colors">{user.email}</span>
                   </div>
                 </div>
               </div>
-              <button className="p-3 bg-white/30 backdrop-blur-sm rounded-2xl hover:bg-white/40 transition-all duration-200 hover:scale-110 border border-white/50 group">
-                <PencilIcon className="w-6 h-6 text-[#292929] group-hover:rotate-12 transition-transform duration-200" />
+
+              {/* Edit Button */}
+              <button className="self-center md:self-start p-3 bg-gradient-to-r from-[#FFC72C] to-[#FFD700] rounded-2xl hover:from-[#FFD700] hover:to-[#FFC72C] transition-all duration-300 hover:scale-110 shadow-xl hover:shadow-2xl hover:shadow-[#FFC72C]/50 group">
+                <PencilIcon className="w-5 h-5 text-[#292929] group-hover:rotate-12 transition-transform duration-200" strokeWidth={2.5} />
               </button>
             </div>
           </div>          {/* Enhanced Stats Row */}
           {user.role === "Owner" && (
-            <div className="px-8 py-6 bg-white/5 backdrop-blur-sm border-b border-[#FFC72C]/20">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="px-6 py-6 bg-white/5 backdrop-blur-sm border-b border-[#FFC72C]/20">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {[
                   { icon: HomeIcon, label: "Properties", value: stats.totalProperties, color: "from-[#FFC72C] to-[#FFD700]", bgColor: "bg-[#FFC72C]/10" },
                   { icon: EyeIcon, label: "Total Views", value: stats.totalViews.toLocaleString(), color: "from-[#FFC72C] to-[#FFB700]", bgColor: "bg-[#FFC72C]/10" },
                   { icon: BuildingOfficeIcon, label: "Bookings", value: stats.totalBookings, color: "from-[#FFC72C] to-[#FFA500]", bgColor: "bg-[#FFC72C]/10" },
                   { icon: CurrencyDollarIcon, label: "Revenue", value: `$${stats.totalRevenue.toLocaleString()}`, color: "from-[#FFC72C] to-[#FF9500]", bgColor: "bg-[#FFC72C]/10" }
                 ].map((stat, index) => (
-                  <div key={index} className="group relative overflow-hidden rounded-2xl p-6 bg-white/10 backdrop-blur-sm border-2 border-[#FFC72C]/20 hover:border-[#FFC72C] hover:shadow-lg hover:shadow-[#FFC72C]/20 transition-all duration-300 hover:-translate-y-2 cursor-pointer">
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#FFC72C]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-[#FFC72C]/20 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div key={index} className="group relative overflow-hidden rounded-2xl p-5 bg-white/10 backdrop-blur-md border-2 border-[#FFC72C]/20 hover:border-[#FFC72C] hover:shadow-lg hover:shadow-[#FFC72C]/30 transition-all duration-300 hover:-translate-y-2 cursor-pointer">
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#FFC72C]/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#FFC72C]/20 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     <div className="relative flex flex-col items-center text-center">
-                      <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-3 bg-gradient-to-r ${stat.color} shadow-lg shadow-[#FFC72C]/30 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}>
+                      <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-3 bg-gradient-to-r ${stat.color} shadow-lg shadow-[#FFC72C]/40 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}>
                         <stat.icon className="w-7 h-7 text-white" />
                       </div>
                       <p className="text-3xl font-bold bg-gradient-to-r from-white to-[#FFC72C] bg-clip-text text-transparent mb-1 group-hover:scale-110 transition-transform duration-300">{stat.value}</p>
-                      <p className="text-sm text-[#5C5C5C] font-medium group-hover:text-[#FFC72C] transition-colors duration-300">{stat.label}</p>
+                      <p className="text-xs text-[#5C5C5C] font-medium group-hover:text-[#FFC72C] transition-colors duration-300 uppercase tracking-wide">{stat.label}</p>
                     </div>
-                    <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r ${stat.color} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                    <div className={`absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r ${stat.color} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left`}></div>
                   </div>
                 ))}
               </div>
             </div>
-          )}{/* Modern Tab Navigation */}
-          <div className="px-8 py-6 bg-white/5 backdrop-blur-sm border-t border-[#FFC72C]/20">
+          )}          {/* Modern Tab Navigation */}
+          <div className="px-6 py-4 bg-white/5 backdrop-blur-sm border-t border-[#FFC72C]/20">
             <div className="border-b border-[#FFC72C]/30">
               <nav className="-mb-px flex space-x-8">
                 {[
@@ -269,10 +311,10 @@ export default function ProfilePage() {
         </div>
 
         {/* Tab Content */}
-        <div className="space-y-8">          {/* Profile Tab */}
+        <div className="space-y-6">          {/* Profile Tab */}
           {activeTab === "profile" && (
             <div className="bg-white/10 backdrop-blur-xl rounded-3xl shadow-xl p-8 border-2 border-[#FFC72C]/30">
-              <div className="flex items-center justify-between mb-8">
+              <div className="flex items-center justify-between mb-6">
                 <div>
                   <h2 className="text-3xl font-bold text-white mb-2">Profile Information</h2>
                   <p className="text-[#5C5C5C]">Update your rental profile to attract more tenants</p>
@@ -283,18 +325,20 @@ export default function ProfilePage() {
                 </div>
               </div>
 
-              <form onSubmit={handleUpdate} className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                {/* Profile Picture Section */}
+              <form onSubmit={handleUpdate} className="grid grid-cols-1 lg:grid-cols-2 gap-6">{/* Profile Picture Section */}
                 <div className="lg:col-span-2 space-y-4">
                   <label className="block text-sm font-semibold text-white mb-2">Profile Picture</label>
                   <div className="relative">
-                    <div className="flex items-center justify-center w-32 h-32 bg-gradient-to-br from-[#FFC72C]/10 to-[#FFC72C]/5 rounded-2xl border-2 border-dashed border-[#FFC72C]/30 mx-auto overflow-hidden group hover:border-[#FFC72C] transition-colors cursor-pointer">
+                    <div className="flex items-center justify-center w-40 h-40 bg-gradient-to-br from-[#FFC72C]/10 to-[#FFC72C]/5 rounded-3xl border-2 border-dashed border-[#FFC72C]/30 mx-auto overflow-hidden group hover:border-[#FFC72C] transition-all duration-300 cursor-pointer hover:shadow-lg hover:shadow-[#FFC72C]/20">
                       {profilePic && !(profilePic instanceof File) ? (
                         <img src={profilePic} alt="Profile" className="w-full h-full object-cover" />
                       ) : (
                         <div className="flex flex-col items-center justify-center text-center p-4">
-                          <UserIcon className="w-12 h-12 text-[#FFC72C] mb-2 group-hover:scale-110 transition-transform" />
-                          <p className="text-sm text-[#5C5C5C] group-hover:text-[#FFC72C] transition-colors">Upload photo</p>
+                          <div className="w-16 h-16 rounded-2xl bg-[#FFC72C]/10 flex items-center justify-center mb-3 group-hover:bg-[#FFC72C]/20 transition-colors">
+                            <UserIcon className="w-10 h-10 text-[#FFC72C] group-hover:scale-110 transition-transform" />
+                          </div>
+                          <p className="text-sm font-medium text-[#5C5C5C] group-hover:text-[#FFC72C] transition-colors">Click to upload</p>
+                          <p className="text-xs text-[#5C5C5C] mt-1">PNG, JPG up to 10MB</p>
                         </div>
                       )}
                       <input
@@ -304,21 +348,18 @@ export default function ProfilePage() {
                         className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                       />
                     </div>
-                    <p className="text-center text-xs text-[#5C5C5C] mt-2">PNG, JPG up to 10MB. Professional photos work best!</p>
                   </div>
-                </div>
-
-                {/* Form Fields */}
+                </div>                {/* Form Fields */}
                 <div className="space-y-6">
                   <div>
                     <label className="block text-sm font-semibold text-white mb-2">Full Name</label>
-                    <div className="relative">
+                    <div className="relative group">
                       <UserIcon className="w-5 h-5 text-[#5C5C5C] absolute left-4 top-1/2 -translate-y-1/2 transition-colors group-focus-within:text-[#FFC72C]" />
                       <input
                         type="text"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        className="w-full pl-12 pr-4 py-4 bg-white/5 backdrop-blur-sm border-2 border-[#FFC72C]/20 rounded-2xl focus:ring-2 focus:ring-[#FFC72C]/50 focus:border-[#FFC72C] transition-all duration-200 placeholder-[#5C5C5C] text-white"
+                        className="w-full pl-12 pr-4 py-4 bg-white/5 backdrop-blur-sm border-2 border-[#FFC72C]/20 rounded-2xl focus:ring-2 focus:ring-[#FFC72C]/50 focus:border-[#FFC72C] transition-all duration-200 placeholder-[#5C5C5C] text-white hover:border-[#FFC72C]/40"
                         placeholder="Enter your full name"
                       />
                     </div>
@@ -326,13 +367,13 @@ export default function ProfilePage() {
 
                   <div>
                     <label className="block text-sm font-semibold text-white mb-2">Phone Number</label>
-                    <div className="relative">
-                      <PhoneIcon className="w-5 h-5 text-[#5C5C5C] absolute left-4 top-1/2 -translate-y-1/2" />
+                    <div className="relative group">
+                      <PhoneIcon className="w-5 h-5 text-[#5C5C5C] absolute left-4 top-1/2 -translate-y-1/2 transition-colors group-focus-within:text-[#FFC72C]" />
                       <input
                         type="tel"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
-                        className="w-full pl-12 pr-4 py-4 bg-white/5 backdrop-blur-sm border-2 border-[#FFC72C]/20 rounded-2xl focus:ring-2 focus:ring-[#FFC72C]/50 focus:border-[#FFC72C] transition-all duration-200 text-white placeholder-[#5C5C5C]"
+                        className="w-full pl-12 pr-4 py-4 bg-white/5 backdrop-blur-sm border-2 border-[#FFC72C]/20 rounded-2xl focus:ring-2 focus:ring-[#FFC72C]/50 focus:border-[#FFC72C] transition-all duration-200 text-white placeholder-[#5C5C5C] hover:border-[#FFC72C]/40"
                         placeholder="+1 (555) 000-0000"
                       />
                     </div>
@@ -346,8 +387,9 @@ export default function ProfilePage() {
                       type="email"
                       value={user.email}
                       disabled
-                      className="w-full px-4 py-4 bg-white/5 backdrop-blur-sm border-2 border-[#5C5C5C]/20 rounded-2xl text-[#5C5C5C] cursor-not-allowed"
+                      className="w-full px-4 py-4 bg-white/5 backdrop-blur-sm border-2 border-[#5C5C5C]/20 rounded-2xl text-[#5C5C5C] cursor-not-allowed opacity-60"
                     />
+                    <p className="text-xs text-[#5C5C5C] mt-1.5">Email cannot be changed</p>
                   </div>
 
                   <div>
@@ -359,18 +401,16 @@ export default function ProfilePage() {
                       </div>
                     </div>
                   </div>
-                </div>
-
-                {/* Address */}
+                </div>                {/* Address */}
                 <div className="lg:col-span-2">
                   <label className="block text-sm font-semibold text-white mb-2">Business Address</label>
-                  <div className="relative">
-                    <MapPinIcon className="w-5 h-5 text-[#5C5C5C] absolute left-4 top-1/2 -translate-y-1/2" />
+                  <div className="relative group">
+                    <MapPinIcon className="w-5 h-5 text-[#5C5C5C] absolute left-4 top-1/2 -translate-y-1/2 transition-colors group-focus-within:text-[#FFC72C]" />
                     <input
                       type="text"
                       value={address}
                       onChange={(e) => setAddress(e.target.value)}
-                      className="w-full pl-12 pr-4 py-4 bg-white/5 backdrop-blur-sm border-2 border-[#FFC72C]/20 rounded-2xl focus:ring-2 focus:ring-[#FFC72C]/50 focus:border-[#FFC72C] transition-all duration-200 text-white placeholder-[#5C5C5C]"
+                      className="w-full pl-12 pr-4 py-4 bg-white/5 backdrop-blur-sm border-2 border-[#FFC72C]/20 rounded-2xl focus:ring-2 focus:ring-[#FFC72C]/50 focus:border-[#FFC72C] transition-all duration-200 text-white placeholder-[#5C5C5C] hover:border-[#FFC72C]/40"
                       placeholder="Enter your business address"
                     />
                   </div>
@@ -430,7 +470,7 @@ export default function ProfilePage() {
           )}          {/* Properties Tab */}
           {activeTab === "properties" && user.role === "Owner" && (
             <div className="bg-white/10 backdrop-blur-xl rounded-3xl shadow-xl p-8 border-2 border-[#FFC72C]/30">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8 gap-4">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
                 <div>
                   <h2 className="text-3xl font-bold text-white mb-1">Your Properties</h2>
                   <p className="text-[#5C5C5C]">Manage your rental listings</p>
@@ -459,23 +499,22 @@ export default function ProfilePage() {
                     Add Your First Property
                   </button>
                 </div>
-              ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+              ) : (                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                   {properties.map((property) => (
                     <div 
                       key={property._id} 
-                      className="group relative bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden shadow-lg hover:shadow-[#FFC72C]/30 transition-all duration-500 hover:-translate-y-2 border-2 border-[#FFC72C]/20 hover:border-[#FFC72C]"
+                      className="group relative bg-white/10 backdrop-blur-md rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-[#FFC72C]/20 transition-all duration-500 hover:-translate-y-2 border-2 border-[#FFC72C]/20 hover:border-[#FFC72C]"
                     >
                       {/* Property Image */}
                       {property.images && property.images[0] && (
-                        <div className="relative h-48 overflow-hidden bg-gradient-to-br from-[#FFC72C]/10 to-[#FFC72C]/5">
+                        <div className="relative h-56 overflow-hidden bg-gradient-to-br from-[#FFC72C]/10 to-[#FFC72C]/5">
                           <img 
                             src={property.images[0]} 
                             alt={property.title}
                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                           />
                           <div className="absolute top-4 right-4">
-                            <span className={`px-3 py-1.5 rounded-full text-xs font-bold shadow-lg backdrop-blur-sm ${
+                            <span className={`px-4 py-2 rounded-full text-xs font-bold shadow-lg backdrop-blur-md ${
                               property.status === 'Available' 
                                 ? 'bg-[#FFC72C]/90 text-[#292929]' 
                                 : property.status === 'Rented'
@@ -485,42 +524,47 @@ export default function ProfilePage() {
                               {property.status}
                             </span>
                           </div>
-                          <div className="absolute inset-0 bg-gradient-to-t from-[#292929]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                          <div className="absolute inset-0 bg-gradient-to-t from-[#000000]/80 via-[#000000]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                          
+                          {/* Quick Action Buttons on Hover */}
+                          <div className="absolute bottom-4 left-4 right-4 flex items-center justify-center space-x-2 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                            <button className="flex-1 px-4 py-2 bg-white/90 backdrop-blur-sm text-[#292929] font-semibold rounded-xl hover:bg-white transition-all duration-200 flex items-center justify-center">
+                              <EyeIcon className="w-4 h-4 mr-1" />
+                              View
+                            </button>
+                            <button className="p-2 bg-white/90 backdrop-blur-sm rounded-xl hover:bg-white transition-all duration-200">
+                              <PencilIcon className="w-4 h-4 text-[#292929]" />
+                            </button>
+                          </div>
                         </div>
                       )}
 
                       {/* Property Info */}
-                      <div className="p-6">
-                        <h3 className="text-lg font-bold text-white mb-2 line-clamp-2 group-hover:text-[#FFC72C] transition-colors">{property.title}</h3>
+                      <div className="p-6 bg-gradient-to-b from-white/5 to-white/10">
+                        <h3 className="text-xl font-bold text-white mb-2 line-clamp-2 group-hover:text-[#FFC72C] transition-colors">{property.title}</h3>
                         <div className="flex items-center text-sm text-[#5C5C5C] mb-4">
-                          <MapPinIcon className="w-4 h-4 mr-1" />
+                          <MapPinIcon className="w-4 h-4 mr-1 flex-shrink-0" />
                           <span className="truncate">{property.location}</span>
                         </div>
                         
-                        {/* Price & Actions */}
-                        <div className="flex items-center justify-between mb-4">
-                          <div className="text-2xl font-bold bg-gradient-to-r from-[#FFC72C] to-[#FFD700] bg-clip-text text-transparent">
+                        {/* Price */}
+                        <div className="flex items-baseline mb-4 pb-4 border-b border-[#FFC72C]/20">
+                          <span className="text-3xl font-bold bg-gradient-to-r from-[#FFC72C] to-[#FFD700] bg-clip-text text-transparent">
                             ${property.price}
-                            <span className="text-base font-normal text-[#5C5C5C]">/month</span>
-                          </div>
-                          
-                          <div className="flex items-center space-x-3 opacity-0 group-hover:opacity-100 transition-all duration-300 delay-150">
-                            <button className="p-2 text-[#5C5C5C] hover:text-[#FFC72C] transition-colors rounded-xl hover:bg-[#FFC72C]/10">
-                              <EyeIcon className="w-5 h-5" />
-                            </button>
-                            <button className="p-2 text-[#5C5C5C] hover:text-red-500 transition-colors rounded-xl hover:bg-red-500/10">
-                              <HeartIcon className="w-5 h-5" />
-                            </button>
-                            <button className="p-2 text-[#5C5C5C] hover:text-white transition-colors rounded-xl hover:bg-white/10">
-                              <PencilIcon className="w-5 h-5" />
-                            </button>
-                          </div>
+                          </span>
+                          <span className="text-sm font-normal text-[#5C5C5C] ml-1">/month</span>
                         </div>
 
                         {/* Quick Stats */}
-                        <div className="flex items-center justify-between text-xs text-[#5C5C5C]">
-                          <span>{property.views || 0} views</span>
-                          <span>{property.bookings || 0} bookings</span>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-1 text-xs text-[#5C5C5C]">
+                            <EyeIcon className="w-4 h-4 text-[#FFC72C]" />
+                            <span>{property.views || 0} views</span>
+                          </div>
+                          <div className="flex items-center space-x-1 text-xs text-[#5C5C5C]">
+                            <BuildingOfficeIcon className="w-4 h-4 text-[#FFC72C]" />
+                            <span>{property.bookings || 0} bookings</span>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -673,9 +717,7 @@ export default function ProfilePage() {
             </div>
           )}
         </div>
-      </div>
-
-      <style jsx>{`
+      </div>      <style jsx>{`
         @keyframes blob {
           0% { transform: translate(0px, 0px) scale(1); }
           33% { transform: translate(30px, -50px) scale(1.1); }
@@ -690,6 +732,13 @@ export default function ProfilePage() {
         }
         .animation-delay-4000 {
           animation-delay: 4s;
+        }
+        @keyframes shimmer {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+        .animate-shimmer {
+          animation: shimmer 3s infinite;
         }
         @keyframes tilt {
           0%, 100% { transform: rotate(0deg); }
