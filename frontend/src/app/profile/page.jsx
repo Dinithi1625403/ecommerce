@@ -139,87 +139,83 @@ export default function ProfilePage() {
     } finally {
       setLoading(false);
     }
-  };
-  if (!user) return (
-    <div className="min-h-screen bg-gradient-to-br from-[#292929] via-[#3a3a3a] to-[#1a1a1a] flex items-center justify-center p-4">
-      <div className="bg-[#292929]/90 backdrop-blur-xl p-12 rounded-3xl shadow-2xl border border-[#FFC72C]/20 max-w-md w-full text-center">
+  };  if (!user) return (
+    <div className="min-h-screen bg-gradient-to-br from-[#1a1a1a] via-[#292929] to-[#000000] flex items-center justify-center p-4">
+      <div className="bg-white/10 backdrop-blur-xl p-12 rounded-3xl shadow-2xl border-2 border-[#FFC72C]/50 max-w-md w-full text-center">
         <div className="relative">
-          <div className="animate-spin rounded-full h-16 w-16 border-4 border-[#5C5C5C] border-t-[#FFC72C] mx-auto mb-6"></div>
-          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#FFC72C]/10 to-[#FFC72C]/5 animate-pulse"></div>
+          <div className="animate-spin rounded-full h-16 w-16 border-4 border-[#FFC72C]/30 border-t-[#FFC72C] mx-auto mb-6"></div>
+          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#FFC72C]/20 to-[#FFC72C]/10 animate-pulse"></div>
         </div>
         <p className="text-lg font-medium text-white">Loading your rental profile...</p>
         <p className="text-sm text-[#5C5C5C] mt-2">Setting up your dashboard</p>
       </div>
     </div>
-  );
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-[#292929] via-[#1f1f1f] to-[#000000]">
+  );  return (
+    <div className="min-h-screen bg-gradient-to-br from-[#1a1a1a] via-[#292929] to-[#000000]">
       {/* Animated Background Pattern */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-[#FFC72C] rounded-full mix-blend-soft-light filter blur-3xl opacity-10 animate-blob"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-[#FFC72C] rounded-full mix-blend-soft-light filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
-        <div className="absolute top-40 left-1/2 w-80 h-80 bg-[#5C5C5C] rounded-full mix-blend-soft-light filter blur-3xl opacity-10 animate-blob animation-delay-4000"></div>
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-[#FFC72C] rounded-full mix-blend-soft-light filter blur-3xl opacity-20 animate-blob"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-[#FFC72C] rounded-full mix-blend-soft-light filter blur-3xl opacity-15 animate-blob animation-delay-2000"></div>
+        <div className="absolute top-40 left-1/2 w-80 h-80 bg-[#FFC72C]/60 rounded-full mix-blend-soft-light filter blur-3xl opacity-10 animate-blob animation-delay-4000"></div>
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Profile Header Card */}
-        <div className="bg-[#292929]/80 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden mb-8 border border-[#FFC72C]/20 hover:border-[#FFC72C]/40 transition-all duration-300">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">        {/* Profile Header Card */}
+        <div className="bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden mb-8 border-2 border-[#FFC72C]/30 hover:border-[#FFC72C] transition-all duration-300">
           {/* Gradient Header */}
-          <div className="relative bg-gradient-to-r from-[#292929] via-[#3a3a3a] to-[#292929] px-8 py-8 overflow-hidden border-b border-[#FFC72C]/20">
-            <div className="absolute inset-0 bg-gradient-to-r from-[#FFC72C]/5 via-[#FFC72C]/10 to-[#FFC72C]/5"></div>
+          <div className="relative bg-gradient-to-r from-[#FFC72C] via-[#FFD700] to-[#FFC72C] px-8 py-8 overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-r from-[#FFC72C]/90 via-[#FFD700]/90 to-[#FFC72C]/90"></div>
             <div className="absolute inset-0 opacity-20">
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#FFC72C]/20 to-transparent animate-shimmer"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer"></div>
             </div>
             <div className="relative flex items-center justify-between">
-              <div className="flex items-center space-x-6">
-                <div className="relative group">
+              <div className="flex items-center space-x-6">                <div className="relative group">
                   <div className="absolute -inset-2 bg-gradient-to-r from-[#FFC72C]/30 to-[#FFC72C]/10 rounded-full blur-xl opacity-75 group-hover:opacity-100 transition duration-500 animate-pulse-slow"></div>
                   {profilePic && !(profilePic instanceof File) ? (
                     <img 
                       src={profilePic} 
                       alt="Profile" 
-                      className="relative w-28 h-28 rounded-full border-4 border-[#FFC72C]/50 shadow-2xl object-cover ring-4 ring-[#FFC72C]/20 group-hover:ring-[#FFC72C]/40 transition-all duration-300 group-hover:scale-105" 
+                      className="relative w-28 h-28 rounded-full border-4 border-white shadow-2xl object-cover ring-4 ring-[#FFC72C]/40 group-hover:ring-[#FFC72C]/60 transition-all duration-300 group-hover:scale-105" 
                     />
                   ) : (
-                    <div className="relative w-28 h-28 rounded-full border-4 border-[#FFC72C]/50 shadow-2xl bg-gradient-to-br from-[#5C5C5C] to-[#292929] flex items-center justify-center ring-4 ring-[#FFC72C]/20 group-hover:ring-[#FFC72C]/40 transition-all duration-300 group-hover:scale-105">
+                    <div className="relative w-28 h-28 rounded-full border-4 border-white shadow-2xl bg-gradient-to-br from-white to-[#FFC72C]/20 flex items-center justify-center ring-4 ring-[#FFC72C]/40 group-hover:ring-[#FFC72C]/60 transition-all duration-300 group-hover:scale-105">
                       <UserIcon className="w-16 h-16 text-[#FFC72C]" />
                     </div>
                   )}
-                  <div className="absolute -bottom-1 -right-1 bg-[#FFC72C] w-7 h-7 rounded-full border-3 border-[#292929] shadow-lg flex items-center justify-center">
-                    <div className="w-3 h-3 bg-[#292929] rounded-full animate-ping"></div>
+                  <div className="absolute -bottom-1 -right-1 bg-[#FFC72C] w-7 h-7 rounded-full border-3 border-white shadow-lg flex items-center justify-center">
+                    <div className="w-3 h-3 bg-white rounded-full animate-ping"></div>
                     <div className="absolute w-2 h-2 bg-[#FFC72C] rounded-full"></div>
                   </div>
                 </div>
-                <div className="text-white">
+                <div className="text-[#292929]">
                   <div className="flex items-center space-x-3 mb-1">
-                    <h1 className="text-4xl font-bold bg-gradient-to-r from-white to-[#FFC72C] bg-clip-text text-transparent">{user.name}</h1>
-                    <div className="flex items-center bg-[#FFC72C]/20 backdrop-blur-sm px-3 py-1 rounded-full border border-[#FFC72C]/30 hover:bg-[#FFC72C]/30 transition-all duration-300">
-                      <ShieldCheckIcon className="w-4 h-4 mr-1 text-[#FFC72C]" />
-                      <span className="text-xs font-medium uppercase tracking-wide text-[#FFC72C]">{user.role}</span>
+                    <h1 className="text-4xl font-bold bg-gradient-to-r from-[#292929] to-[#5C5C5C] bg-clip-text text-transparent">{user.name}</h1>
+                    <div className="flex items-center bg-white/30 backdrop-blur-sm px-3 py-1 rounded-full border border-white/50 hover:bg-white/40 transition-all duration-300">
+                      <ShieldCheckIcon className="w-4 h-4 mr-1 text-[#292929]" />
+                      <span className="text-xs font-medium uppercase tracking-wide text-[#292929]">{user.role}</span>
                     </div>
                   </div>
-                  <div className="flex items-center space-x-6 text-[#5C5C5C]">
+                  <div className="flex items-center space-x-6 text-[#292929]/80">
                     <div className="flex items-center space-x-1 group hover:scale-105 transition-transform duration-200">
                       {[1,2,3,4].map((i) => (
                         <StarIconSolid key={i} className="w-5 h-5 text-[#FFC72C] fill-[#FFC72C] group-hover:animate-pulse" />
                       ))}
-                      <StarIcon className="w-5 h-5 text-[#FFC72C]" />
-                      <span className="text-sm font-medium text-white ml-1">4.8</span>
+                      <StarIcon className="w-5 h-5 text-[#292929]" />
+                      <span className="text-sm font-medium text-[#292929] ml-1">4.8</span>
                     </div>
-                    <div className="flex items-center space-x-1 hover:text-[#FFC72C] transition-colors duration-200">
+                    <div className="flex items-center space-x-1 hover:text-[#292929] transition-colors duration-200">
                       <CalendarIcon className="w-4 h-4" />
                       <span className="text-sm">Since {new Date(user.createdAt || Date.now()).getFullYear()}</span>
                     </div>
                   </div>
                 </div>
               </div>
-              <button className="p-3 bg-[#FFC72C]/10 backdrop-blur-sm rounded-2xl hover:bg-[#FFC72C]/20 transition-all duration-200 hover:scale-110 border border-[#FFC72C]/30 group">
-                <PencilIcon className="w-6 h-6 text-[#FFC72C] group-hover:rotate-12 transition-transform duration-200" />
+              <button className="p-3 bg-white/30 backdrop-blur-sm rounded-2xl hover:bg-white/40 transition-all duration-200 hover:scale-110 border border-white/50 group">
+                <PencilIcon className="w-6 h-6 text-[#292929] group-hover:rotate-12 transition-transform duration-200" />
               </button>
             </div>
           </div>          {/* Enhanced Stats Row */}
           {user.role === "Owner" && (
-            <div className="px-8 py-6 bg-gradient-to-r from-[#292929]/80 to-[#1f1f1f]/80 backdrop-blur-sm border-b border-[#FFC72C]/10">
+            <div className="px-8 py-6 bg-white/5 backdrop-blur-sm border-b border-[#FFC72C]/20">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 {[
                   { icon: HomeIcon, label: "Properties", value: stats.totalProperties, color: "from-[#FFC72C] to-[#FFD700]", bgColor: "bg-[#FFC72C]/10" },
@@ -227,12 +223,12 @@ export default function ProfilePage() {
                   { icon: BuildingOfficeIcon, label: "Bookings", value: stats.totalBookings, color: "from-[#FFC72C] to-[#FFA500]", bgColor: "bg-[#FFC72C]/10" },
                   { icon: CurrencyDollarIcon, label: "Revenue", value: `$${stats.totalRevenue.toLocaleString()}`, color: "from-[#FFC72C] to-[#FF9500]", bgColor: "bg-[#FFC72C]/10" }
                 ].map((stat, index) => (
-                  <div key={index} className="group relative overflow-hidden rounded-2xl p-6 bg-[#292929]/60 backdrop-blur-sm border border-[#FFC72C]/20 hover:border-[#FFC72C]/50 hover:shadow-lg hover:shadow-[#FFC72C]/20 transition-all duration-300 hover:-translate-y-2 cursor-pointer">
+                  <div key={index} className="group relative overflow-hidden rounded-2xl p-6 bg-white/10 backdrop-blur-sm border-2 border-[#FFC72C]/20 hover:border-[#FFC72C] hover:shadow-lg hover:shadow-[#FFC72C]/20 transition-all duration-300 hover:-translate-y-2 cursor-pointer">
                     <div className="absolute inset-0 bg-gradient-to-br from-[#FFC72C]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-[#FFC72C]/20 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     <div className="relative flex flex-col items-center text-center">
                       <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-3 bg-gradient-to-r ${stat.color} shadow-lg shadow-[#FFC72C]/30 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}>
-                        <stat.icon className="w-7 h-7 text-[#292929]" />
+                        <stat.icon className="w-7 h-7 text-white" />
                       </div>
                       <p className="text-3xl font-bold bg-gradient-to-r from-white to-[#FFC72C] bg-clip-text text-transparent mb-1 group-hover:scale-110 transition-transform duration-300">{stat.value}</p>
                       <p className="text-sm text-[#5C5C5C] font-medium group-hover:text-[#FFC72C] transition-colors duration-300">{stat.label}</p>
@@ -242,9 +238,9 @@ export default function ProfilePage() {
                 ))}
               </div>
             </div>
-          )}          {/* Modern Tab Navigation */}
-          <div className="px-8 py-6 bg-[#292929]/60 backdrop-blur-sm border-t border-[#FFC72C]/10">
-            <div className="border-b border-[#5C5C5C]/30">
+          )}{/* Modern Tab Navigation */}
+          <div className="px-8 py-6 bg-white/5 backdrop-blur-sm border-t border-[#FFC72C]/20">
+            <div className="border-b border-[#FFC72C]/30">
               <nav className="-mb-px flex space-x-8">
                 {[
                   { id: "profile", label: "Profile", icon: UserIcon },
@@ -257,7 +253,7 @@ export default function ProfilePage() {
                     className={`group inline-flex items-center px-1 py-4 border-b-2 font-medium text-sm transition-all duration-200 relative overflow-hidden ${
                       activeTab === tab.id
                         ? "border-[#FFC72C] text-[#FFC72C]"
-                        : "border-transparent text-[#5C5C5C] hover:text-white hover:border-[#5C5C5C]"
+                        : "border-transparent text-[#5C5C5C] hover:text-white hover:border-[#FFC72C]/50"
                     }`}
                   >
                     <tab.icon className={`w-5 h-5 mr-2 transition-transform duration-200 ${activeTab === tab.id ? 'scale-110' : ''}`} />
@@ -275,7 +271,7 @@ export default function ProfilePage() {
         {/* Tab Content */}
         <div className="space-y-8">          {/* Profile Tab */}
           {activeTab === "profile" && (
-            <div className="bg-[#292929]/90 backdrop-blur-xl rounded-3xl shadow-xl p-8 border border-[#FFC72C]/20">
+            <div className="bg-white/10 backdrop-blur-xl rounded-3xl shadow-xl p-8 border-2 border-[#FFC72C]/30">
               <div className="flex items-center justify-between mb-8">
                 <div>
                   <h2 className="text-3xl font-bold text-white mb-2">Profile Information</h2>
@@ -292,7 +288,7 @@ export default function ProfilePage() {
                 <div className="lg:col-span-2 space-y-4">
                   <label className="block text-sm font-semibold text-white mb-2">Profile Picture</label>
                   <div className="relative">
-                    <div className="flex items-center justify-center w-32 h-32 bg-gradient-to-br from-[#5C5C5C] to-[#292929] rounded-2xl border-2 border-dashed border-[#FFC72C]/30 mx-auto overflow-hidden group hover:border-[#FFC72C] transition-colors cursor-pointer">
+                    <div className="flex items-center justify-center w-32 h-32 bg-gradient-to-br from-[#FFC72C]/10 to-[#FFC72C]/5 rounded-2xl border-2 border-dashed border-[#FFC72C]/30 mx-auto overflow-hidden group hover:border-[#FFC72C] transition-colors cursor-pointer">
                       {profilePic && !(profilePic instanceof File) ? (
                         <img src={profilePic} alt="Profile" className="w-full h-full object-cover" />
                       ) : (
@@ -322,7 +318,7 @@ export default function ProfilePage() {
                         type="text"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        className="w-full pl-12 pr-4 py-4 bg-[#292929]/50 backdrop-blur-sm border border-[#5C5C5C]/30 rounded-2xl focus:ring-2 focus:ring-[#FFC72C]/50 focus:border-[#FFC72C] transition-all duration-200 placeholder-[#5C5C5C] text-white"
+                        className="w-full pl-12 pr-4 py-4 bg-white/5 backdrop-blur-sm border-2 border-[#FFC72C]/20 rounded-2xl focus:ring-2 focus:ring-[#FFC72C]/50 focus:border-[#FFC72C] transition-all duration-200 placeholder-[#5C5C5C] text-white"
                         placeholder="Enter your full name"
                       />
                     </div>
@@ -336,7 +332,7 @@ export default function ProfilePage() {
                         type="tel"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
-                        className="w-full pl-12 pr-4 py-4 bg-[#292929]/50 backdrop-blur-sm border border-[#5C5C5C]/30 rounded-2xl focus:ring-2 focus:ring-[#FFC72C]/50 focus:border-[#FFC72C] transition-all duration-200 text-white placeholder-[#5C5C5C]"
+                        className="w-full pl-12 pr-4 py-4 bg-white/5 backdrop-blur-sm border-2 border-[#FFC72C]/20 rounded-2xl focus:ring-2 focus:ring-[#FFC72C]/50 focus:border-[#FFC72C] transition-all duration-200 text-white placeholder-[#5C5C5C]"
                         placeholder="+1 (555) 000-0000"
                       />
                     </div>
@@ -350,13 +346,13 @@ export default function ProfilePage() {
                       type="email"
                       value={user.email}
                       disabled
-                      className="w-full px-4 py-4 bg-[#1f1f1f]/70 backdrop-blur-sm border border-[#5C5C5C]/30 rounded-2xl text-[#5C5C5C] cursor-not-allowed"
+                      className="w-full px-4 py-4 bg-white/5 backdrop-blur-sm border-2 border-[#5C5C5C]/20 rounded-2xl text-[#5C5C5C] cursor-not-allowed"
                     />
                   </div>
 
                   <div>
                     <label className="block text-sm font-semibold text-white mb-2">Account Type</label>
-                    <div className="flex items-center px-4 py-4 bg-gradient-to-r from-[#FFC72C]/10 to-[#FFC72C]/5 rounded-2xl border border-[#FFC72C]/30">
+                    <div className="flex items-center px-4 py-4 bg-gradient-to-r from-[#FFC72C]/10 to-[#FFC72C]/5 rounded-2xl border-2 border-[#FFC72C]/30">
                       <div className="flex items-center space-x-2">
                         <div className="w-2 h-2 bg-[#FFC72C] rounded-full animate-pulse"></div>
                         <span className="font-semibold text-[#FFC72C]">{user.role}</span>
@@ -374,7 +370,7 @@ export default function ProfilePage() {
                       type="text"
                       value={address}
                       onChange={(e) => setAddress(e.target.value)}
-                      className="w-full pl-12 pr-4 py-4 bg-[#292929]/50 backdrop-blur-sm border border-[#5C5C5C]/30 rounded-2xl focus:ring-2 focus:ring-[#FFC72C]/50 focus:border-[#FFC72C] transition-all duration-200 text-white placeholder-[#5C5C5C]"
+                      className="w-full pl-12 pr-4 py-4 bg-white/5 backdrop-blur-sm border-2 border-[#FFC72C]/20 rounded-2xl focus:ring-2 focus:ring-[#FFC72C]/50 focus:border-[#FFC72C] transition-all duration-200 text-white placeholder-[#5C5C5C]"
                       placeholder="Enter your business address"
                     />
                   </div>
@@ -407,7 +403,7 @@ export default function ProfilePage() {
               </form>
 
               {message && (
-                <div className={`mt-6 p-4 rounded-2xl backdrop-blur-sm border ${
+                <div className={`mt-6 p-4 rounded-2xl backdrop-blur-sm border-2 ${
                   message.includes("success") 
                     ? "bg-[#FFC72C]/10 border-[#FFC72C]/30" 
                     : "bg-red-500/10 border-red-500/30"
@@ -433,7 +429,7 @@ export default function ProfilePage() {
             </div>
           )}          {/* Properties Tab */}
           {activeTab === "properties" && user.role === "Owner" && (
-            <div className="bg-[#292929]/90 backdrop-blur-xl rounded-3xl shadow-xl p-8 border border-[#FFC72C]/20">
+            <div className="bg-white/10 backdrop-blur-xl rounded-3xl shadow-xl p-8 border-2 border-[#FFC72C]/30">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8 gap-4">
                 <div>
                   <h2 className="text-3xl font-bold text-white mb-1">Your Properties</h2>
@@ -468,11 +464,11 @@ export default function ProfilePage() {
                   {properties.map((property) => (
                     <div 
                       key={property._id} 
-                      className="group relative bg-[#292929]/60 backdrop-blur-sm rounded-2xl overflow-hidden shadow-lg hover:shadow-[#FFC72C]/30 transition-all duration-500 hover:-translate-y-2 border border-[#5C5C5C]/30 hover:border-[#FFC72C]/50"
+                      className="group relative bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden shadow-lg hover:shadow-[#FFC72C]/30 transition-all duration-500 hover:-translate-y-2 border-2 border-[#FFC72C]/20 hover:border-[#FFC72C]"
                     >
                       {/* Property Image */}
                       {property.images && property.images[0] && (
-                        <div className="relative h-48 overflow-hidden bg-gradient-to-br from-[#5C5C5C] to-[#292929]">
+                        <div className="relative h-48 overflow-hidden bg-gradient-to-br from-[#FFC72C]/10 to-[#FFC72C]/5">
                           <img 
                             src={property.images[0]} 
                             alt={property.title}
@@ -515,7 +511,7 @@ export default function ProfilePage() {
                             <button className="p-2 text-[#5C5C5C] hover:text-red-500 transition-colors rounded-xl hover:bg-red-500/10">
                               <HeartIcon className="w-5 h-5" />
                             </button>
-                            <button className="p-2 text-[#5C5C5C] hover:text-white transition-colors rounded-xl hover:bg-[#5C5C5C]/30">
+                            <button className="p-2 text-[#5C5C5C] hover:text-white transition-colors rounded-xl hover:bg-white/10">
                               <PencilIcon className="w-5 h-5" />
                             </button>
                           </div>
@@ -532,9 +528,9 @@ export default function ProfilePage() {
                 </div>
               )}
             </div>
-          )}          {/* Settings Tab */}
+          )}{/* Settings Tab */}
           {activeTab === "settings" && (
-            <div className="bg-[#292929]/90 backdrop-blur-xl rounded-3xl shadow-xl p-8 border border-[#FFC72C]/20">
+            <div className="bg-white/10 backdrop-blur-xl rounded-3xl shadow-xl p-8 border-2 border-[#FFC72C]/30">
               <h2 className="text-3xl font-bold text-white mb-2">Account Settings</h2>
               <p className="text-[#5C5C5C] mb-8">Manage your rental account preferences</p>
               
@@ -547,10 +543,10 @@ export default function ProfilePage() {
                   </div>
                   
                   <div className="space-y-4">
-                    <button className="w-full text-left p-6 bg-[#292929]/60 backdrop-blur-sm rounded-2xl border border-[#5C5C5C]/30 hover:border-[#FFC72C]/50 hover:shadow-md hover:shadow-[#FFC72C]/10 transition-all duration-200 hover:-translate-y-0.5 group">
+                    <button className="w-full text-left p-6 bg-white/5 backdrop-blur-sm rounded-2xl border-2 border-[#FFC72C]/30 hover:border-[#FFC72C] hover:shadow-md hover:shadow-[#FFC72C]/10 transition-all duration-200 hover:-translate-y-0.5 group">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-4">
-                          <div className="p-3 bg-[#FFC72C]/10 rounded-2xl group-hover:bg-[#FFC72C]/20 transition-colors">
+                          <div className="p-3 bg-[#FFC72C]/20 rounded-2xl group-hover:bg-[#FFC72C]/30 transition-colors">
                             <KeyIcon className="w-6 h-6 text-[#FFC72C]" />
                           </div>
                           <div>
@@ -559,7 +555,7 @@ export default function ProfilePage() {
                           </div>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <span className="px-3 py-1 bg-[#FFC72C]/10 backdrop-blur-sm rounded-full text-sm font-medium text-[#FFC72C]">Secure</span>
+                          <span className="px-3 py-1 bg-[#FFC72C]/20 backdrop-blur-sm rounded-full text-sm font-medium text-[#FFC72C]">Secure</span>
                           <svg className="w-5 h-5 text-[#5C5C5C] group-hover:text-[#FFC72C] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                           </svg>
@@ -568,10 +564,10 @@ export default function ProfilePage() {
                     </button>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <button className="p-6 bg-[#292929]/60 backdrop-blur-sm rounded-2xl border border-[#5C5C5C]/30 hover:border-[#FFC72C]/50 hover:shadow-md hover:shadow-[#FFC72C]/10 transition-all duration-200 text-left group">
+                      <button className="p-6 bg-white/5 backdrop-blur-sm rounded-2xl border-2 border-[#FFC72C]/30 hover:border-[#FFC72C] hover:shadow-md hover:shadow-[#FFC72C]/10 transition-all duration-200 text-left group">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center space-x-4">
-                            <div className="p-3 bg-[#FFC72C]/10 rounded-2xl group-hover:bg-[#FFC72C]/20 transition-colors">
+                            <div className="p-3 bg-[#FFC72C]/20 rounded-2xl group-hover:bg-[#FFC72C]/30 transition-colors">
                               <ShieldCheckIcon className="w-6 h-6 text-[#FFC72C]" />
                             </div>
                             <div>
@@ -586,10 +582,10 @@ export default function ProfilePage() {
                         </div>
                       </button>
 
-                      <button className="p-6 bg-[#292929]/60 backdrop-blur-sm rounded-2xl border border-[#5C5C5C]/30 hover:border-[#FFC72C]/50 hover:shadow-md hover:shadow-[#FFC72C]/10 transition-all duration-200 text-left group">
+                      <button className="p-6 bg-white/5 backdrop-blur-sm rounded-2xl border-2 border-[#FFC72C]/30 hover:border-[#FFC72C] hover:shadow-md hover:shadow-[#FFC72C]/10 transition-all duration-200 text-left group">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center space-x-4">
-                            <div className="p-3 bg-[#FFC72C]/10 rounded-2xl group-hover:bg-[#FFC72C]/20 transition-colors">
+                            <div className="p-3 bg-[#FFC72C]/20 rounded-2xl group-hover:bg-[#FFC72C]/30 transition-colors">
                               <BellIcon className="w-6 h-6 text-[#FFC72C]" />
                             </div>
                             <div>
@@ -612,10 +608,10 @@ export default function ProfilePage() {
                   </div>
                   
                   <div className="space-y-4">
-                    <div className="p-6 bg-[#292929]/60 backdrop-blur-sm rounded-2xl border border-[#5C5C5C]/30 hover:border-[#FFC72C]/50 transition-all">
+                    <div className="p-6 bg-white/5 backdrop-blur-sm rounded-2xl border-2 border-[#FFC72C]/30 hover:border-[#FFC72C] transition-all">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-4">
-                          <div className="p-3 bg-[#FFC72C]/10 rounded-2xl">
+                          <div className="p-3 bg-[#FFC72C]/20 rounded-2xl">
                             <svg className="w-6 h-6 text-[#FFC72C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                             </svg>
@@ -632,10 +628,10 @@ export default function ProfilePage() {
                       </div>
                     </div>
                     
-                    <div className="p-6 bg-[#292929]/60 backdrop-blur-sm rounded-2xl border border-[#5C5C5C]/30 hover:border-[#FFC72C]/50 transition-all">
+                    <div className="p-6 bg-white/5 backdrop-blur-sm rounded-2xl border-2 border-[#FFC72C]/30 hover:border-[#FFC72C] transition-all">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-4">
-                          <div className="p-3 bg-[#FFC72C]/10 rounded-2xl">
+                          <div className="p-3 bg-[#FFC72C]/20 rounded-2xl">
                             <svg className="w-6 h-6 text-[#FFC72C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>
@@ -655,13 +651,13 @@ export default function ProfilePage() {
                 </div>
 
                 {/* Danger Zone */}
-                <div className="pt-8 border-t border-[#5C5C5C]/30">
+                <div className="pt-8 border-t border-[#FFC72C]/30">
                   <div className="flex items-center space-x-3 mb-6">
                     <div className="w-2 h-8 bg-gradient-to-b from-red-500 to-red-700 rounded-full"></div>
                     <h3 className="text-xl font-bold text-white">Danger Zone</h3>
                   </div>
                   
-                  <div className="p-6 bg-red-500/10 backdrop-blur-sm rounded-2xl border border-red-500/30">
+                  <div className="p-6 bg-red-500/10 backdrop-blur-sm rounded-2xl border-2 border-red-500/30">
                     <div className="flex items-center justify-between">
                       <div>
                         <p className="font-bold text-red-400 text-lg">Delete Account</p>
