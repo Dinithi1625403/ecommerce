@@ -313,11 +313,10 @@ export default function ProfilePage() {
         {/* Tab Content */}
         <div className="space-y-6">          {/* Profile Tab */}
           {activeTab === "profile" && (
-            <div className="bg-white/10 backdrop-blur-xl rounded-3xl shadow-xl p-8 border-2 border-[#FFC72C]/30">
-              <div className="flex items-center justify-between mb-6">
+            <div className="bg-white/10 backdrop-blur-xl rounded-3xl shadow-xl p-8 border-2 border-[#FFC72C]/30">              <div className="flex items-center justify-between mb-6">
                 <div>
                   <h2 className="text-3xl font-bold text-white mb-2">Profile Information</h2>
-                  <p className="text-[#5C5C5C]">Update your rental profile to attract more tenants</p>
+                  <p className="text-[#A0A0A0]">Update your rental profile to attract more tenants</p>
                 </div>
                 <div className="flex items-center space-x-2 bg-[#FFC72C]/10 px-4 py-2 rounded-2xl border border-[#FFC72C]/30">
                   <KeyIcon className="w-5 h-5 text-[#FFC72C]" />
@@ -352,69 +351,109 @@ export default function ProfilePage() {
                 </div>                {/* Form Fields */}
                 <div className="space-y-6">
                   <div>
-                    <label className="block text-sm font-semibold text-white mb-2">Full Name</label>
+                    <label className="flex items-center text-sm font-semibold text-white mb-3">
+                      <span className="mr-2">Full Name</span>
+                      <span className="text-red-400">*</span>
+                    </label>
                     <div className="relative group">
-                      <UserIcon className="w-5 h-5 text-[#5C5C5C] absolute left-4 top-1/2 -translate-y-1/2 transition-colors group-focus-within:text-[#FFC72C]" />
-                      <input
-                        type="text"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        className="w-full pl-12 pr-4 py-4 bg-white/5 backdrop-blur-sm border-2 border-[#FFC72C]/20 rounded-2xl focus:ring-2 focus:ring-[#FFC72C]/50 focus:border-[#FFC72C] transition-all duration-200 placeholder-[#5C5C5C] text-white hover:border-[#FFC72C]/40"
-                        placeholder="Enter your full name"
-                      />
+                      <div className="absolute -inset-0.5 bg-gradient-to-r from-[#FFC72C] to-[#FFD700] rounded-xl opacity-0 group-focus-within:opacity-20 blur transition-opacity duration-300"></div>
+                      <div className="relative flex items-center">
+                        <UserIcon className="w-5 h-5 text-[#FFC72C]/60 absolute left-4 transition-all duration-300 group-focus-within:text-[#FFC72C] pointer-events-none z-10" />
+                        <input
+                          type="text"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                          className="relative w-full pl-12 pr-4 py-3.5 bg-[#1a1a1a]/60 backdrop-blur-md border border-[#FFC72C]/30 rounded-xl text-white placeholder-[#FFC72C]/50 focus:border-[#FFC72C] focus:bg-[#1a1a1a]/80 focus:outline-none focus:ring-2 focus:ring-[#FFC72C]/20 transition-all duration-300"
+                          placeholder="Enter your full name"
+                        />
+                      </div>
+                    </div>
+                  </div>                  <div>
+                    <label className="flex items-center text-sm font-semibold text-white mb-3">
+                      <span className="mr-2">Phone Number</span>
+                      <span className="text-[#A0A0A0] text-xs font-normal">(Optional)</span>
+                    </label>
+                    <div className="relative group">
+                      <div className="absolute -inset-0.5 bg-gradient-to-r from-[#FFC72C] to-[#FFD700] rounded-xl opacity-0 group-focus-within:opacity-20 blur transition-opacity duration-300"></div>
+                      <div className="relative flex items-center">
+                        <PhoneIcon className="w-5 h-5 text-[#FFC72C]/60 absolute left-4 transition-all duration-300 group-focus-within:text-[#FFC72C] pointer-events-none z-10" />
+                        <input
+                          type="tel"
+                          value={phone}
+                          onChange={(e) => setPhone(e.target.value)}
+                          className="relative w-full pl-12 pr-4 py-3.5 bg-[#1a1a1a]/60 backdrop-blur-md border border-[#FFC72C]/30 rounded-xl text-white placeholder-[#FFC72C]/50 focus:border-[#FFC72C] focus:bg-[#1a1a1a]/80 focus:outline-none focus:ring-2 focus:ring-[#FFC72C]/20 transition-all duration-300"
+                          placeholder="+1 (555) 000-0000"
+                        />
+                      </div>
                     </div>
                   </div>
-
-                  <div>
-                    <label className="block text-sm font-semibold text-white mb-2">Phone Number</label>
-                    <div className="relative group">
-                      <PhoneIcon className="w-5 h-5 text-[#5C5C5C] absolute left-4 top-1/2 -translate-y-1/2 transition-colors group-focus-within:text-[#FFC72C]" />
-                      <input
-                        type="tel"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        className="w-full pl-12 pr-4 py-4 bg-white/5 backdrop-blur-sm border-2 border-[#FFC72C]/20 rounded-2xl focus:ring-2 focus:ring-[#FFC72C]/50 focus:border-[#FFC72C] transition-all duration-200 text-white placeholder-[#5C5C5C] hover:border-[#FFC72C]/40"
-                        placeholder="+1 (555) 000-0000"
-                      />
+                </div>                <div className="space-y-6">                  <div>
+                    <label className="flex items-center text-sm font-semibold text-white mb-3">
+                      <span className="mr-2">Email Address</span>
+                      <span className="px-2 py-0.5 bg-[#A0A0A0]/20 rounded-full text-xs font-normal text-[#A0A0A0]">Locked</span>
+                    </label>
+                    <div className="relative">
+                      <div className="relative flex items-center">
+                        <svg className="w-5 h-5 text-[#A0A0A0] absolute left-4 pointer-events-none z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                        <input
+                          type="email"
+                          value={user.email}
+                          disabled
+                          className="w-full pl-12 pr-4 py-3.5 bg-[#1a1a1a]/40 backdrop-blur-md border border-[#A0A0A0]/20 rounded-xl text-[#A0A0A0] cursor-not-allowed opacity-90"
+                        />
+                      </div>
                     </div>
-                  </div>
-                </div>
-
-                <div className="space-y-6">
-                  <div>
-                    <label className="block text-sm font-semibold text-white mb-2">Email Address</label>
-                    <input
-                      type="email"
-                      value={user.email}
-                      disabled
-                      className="w-full px-4 py-4 bg-white/5 backdrop-blur-sm border-2 border-[#5C5C5C]/20 rounded-2xl text-[#5C5C5C] cursor-not-allowed opacity-60"
-                    />
-                    <p className="text-xs text-[#5C5C5C] mt-1.5">Email cannot be changed</p>
+                    <p className="text-xs text-[#A0A0A0] mt-2 flex items-center">
+                      <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                      </svg>
+                      Email cannot be changed for security reasons
+                    </p>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-semibold text-white mb-2">Account Type</label>
-                    <div className="flex items-center px-4 py-4 bg-gradient-to-r from-[#FFC72C]/10 to-[#FFC72C]/5 rounded-2xl border-2 border-[#FFC72C]/30">
-                      <div className="flex items-center space-x-2">
-                        <div className="w-2 h-2 bg-[#FFC72C] rounded-full animate-pulse"></div>
-                        <span className="font-semibold text-[#FFC72C]">{user.role}</span>
+                    <label className="block text-sm font-semibold text-white mb-3">Account Type</label>
+                    <div className="relative group overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-r from-[#FFC72C]/0 via-[#FFC72C]/10 to-[#FFC72C]/0 animate-shimmer"></div>
+                      <div className="relative flex items-center px-4 py-4 bg-gradient-to-r from-[#FFC72C]/10 to-[#FFD700]/10 rounded-2xl border-2 border-[#FFC72C]/40 shadow-lg shadow-[#FFC72C]/20">
+                        <div className="flex items-center space-x-3">
+                          <div className="relative">
+                            <div className="w-3 h-3 bg-[#FFC72C] rounded-full animate-pulse"></div>
+                            <div className="absolute inset-0 w-3 h-3 bg-[#FFC72C] rounded-full animate-ping"></div>
+                          </div>
+                          <span className="font-bold text-[#FFC72C] text-lg">{user.role}</span>
+                          <ShieldCheckIcon className="w-5 h-5 text-[#FFC72C]" />
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>                {/* Address */}
                 <div className="lg:col-span-2">
-                  <label className="block text-sm font-semibold text-white mb-2">Business Address</label>
+                  <label className="flex items-center text-sm font-semibold text-white mb-3">
+                    <span className="mr-2">Business Address</span>
+                    <span className="text-[#A0A0A0] text-xs font-normal">(Optional)</span>
+                  </label>
                   <div className="relative group">
-                    <MapPinIcon className="w-5 h-5 text-[#5C5C5C] absolute left-4 top-1/2 -translate-y-1/2 transition-colors group-focus-within:text-[#FFC72C]" />
-                    <input
-                      type="text"
-                      value={address}
-                      onChange={(e) => setAddress(e.target.value)}
-                      className="w-full pl-12 pr-4 py-4 bg-white/5 backdrop-blur-sm border-2 border-[#FFC72C]/20 rounded-2xl focus:ring-2 focus:ring-[#FFC72C]/50 focus:border-[#FFC72C] transition-all duration-200 text-white placeholder-[#5C5C5C] hover:border-[#FFC72C]/40"
-                      placeholder="Enter your business address"
-                    />
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-[#FFC72C] to-[#FFD700] rounded-xl opacity-0 group-focus-within:opacity-20 blur transition-opacity duration-300"></div>
+                    <div className="relative flex items-center">
+                      <MapPinIcon className="w-5 h-5 text-[#FFC72C]/60 absolute left-4 transition-all duration-300 group-focus-within:text-[#FFC72C] pointer-events-none z-10" />
+                      <input
+                        type="text"
+                        value={address}
+                        onChange={(e) => setAddress(e.target.value)}
+                        className="relative w-full pl-12 pr-4 py-3.5 bg-[#1a1a1a]/60 backdrop-blur-md border border-[#FFC72C]/30 rounded-xl text-white placeholder-[#FFC72C]/50 focus:border-[#FFC72C] focus:bg-[#1a1a1a]/80 focus:outline-none focus:ring-2 focus:ring-[#FFC72C]/20 transition-all duration-300"
+                        placeholder="Enter your business address"
+                      />
+                    </div>
                   </div>
-                  <p className="text-xs text-[#5C5C5C] mt-1">This will appear on your property listings</p>
+                  <p className="text-xs text-[#A0A0A0] mt-2 flex items-center">
+                    <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                    </svg>
+                    This will appear on your property listings
+                  </p>
                 </div>
 
                 {/* Submit Button */}
@@ -573,10 +612,9 @@ export default function ProfilePage() {
               )}
             </div>
           )}{/* Settings Tab */}
-          {activeTab === "settings" && (
-            <div className="bg-white/10 backdrop-blur-xl rounded-3xl shadow-xl p-8 border-2 border-[#FFC72C]/30">
+          {activeTab === "settings" && (            <div className="bg-white/10 backdrop-blur-xl rounded-3xl shadow-xl p-8 border-2 border-[#FFC72C]/30">
               <h2 className="text-3xl font-bold text-white mb-2">Account Settings</h2>
-              <p className="text-[#5C5C5C] mb-8">Manage your rental account preferences</p>
+              <p className="text-[#A0A0A0] mb-8">Manage your rental account preferences</p>
               
               <div className="space-y-8">
                 {/* Security Section */}
@@ -592,15 +630,14 @@ export default function ProfilePage() {
                         <div className="flex items-center space-x-4">
                           <div className="p-3 bg-[#FFC72C]/20 rounded-2xl group-hover:bg-[#FFC72C]/30 transition-colors">
                             <KeyIcon className="w-6 h-6 text-[#FFC72C]" />
-                          </div>
-                          <div>
+                          </div>                          <div>
                             <p className="font-semibold text-white">Change Password</p>
-                            <p className="text-sm text-[#5C5C5C]">Update your account password for security</p>
+                            <p className="text-sm text-[#A0A0A0]">Update your account password for security</p>
                           </div>
                         </div>
                         <div className="flex items-center space-x-2">
                           <span className="px-3 py-1 bg-[#FFC72C]/20 backdrop-blur-sm rounded-full text-sm font-medium text-[#FFC72C]">Secure</span>
-                          <svg className="w-5 h-5 text-[#5C5C5C] group-hover:text-[#FFC72C] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-5 h-5 text-[#A0A0A0] group-hover:text-[#FFC72C] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                           </svg>
                         </div>
@@ -613,15 +650,14 @@ export default function ProfilePage() {
                           <div className="flex items-center space-x-4">
                             <div className="p-3 bg-[#FFC72C]/20 rounded-2xl group-hover:bg-[#FFC72C]/30 transition-colors">
                               <ShieldCheckIcon className="w-6 h-6 text-[#FFC72C]" />
-                            </div>
-                            <div>
+                            </div>                            <div>
                               <p className="font-semibold text-white">Two-Factor Auth</p>
-                              <p className="text-sm text-[#5C5C5C]">Extra security layer</p>
+                              <p className="text-sm text-[#A0A0A0]">Extra security layer</p>
                             </div>
                           </div>
                           <label className="relative inline-flex items-center cursor-pointer">
                             <input type="checkbox" className="sr-only peer" />
-                            <div className="relative w-11 h-6 bg-[#5C5C5C] peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#FFC72C]/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#FFC72C]"></div>
+                            <div className="relative w-11 h-6 bg-[#4A4A4A] peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#FFC72C]/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#FFC72C]"></div>
                           </label>
                         </div>
                       </button>
@@ -631,10 +667,9 @@ export default function ProfilePage() {
                           <div className="flex items-center space-x-4">
                             <div className="p-3 bg-[#FFC72C]/20 rounded-2xl group-hover:bg-[#FFC72C]/30 transition-colors">
                               <BellIcon className="w-6 h-6 text-[#FFC72C]" />
-                            </div>
-                            <div>
+                            </div>                            <div>
                               <p className="font-semibold text-white">Session Management</p>
-                              <p className="text-sm text-[#5C5C5C]">Review active sessions</p>
+                              <p className="text-sm text-[#A0A0A0]">Review active sessions</p>
                             </div>
                           </div>
                           <div className="w-2 h-2 bg-[#FFC72C] rounded-full animate-ping"></div>
@@ -659,15 +694,14 @@ export default function ProfilePage() {
                             <svg className="w-6 h-6 text-[#FFC72C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                             </svg>
-                          </div>
-                          <div>
+                          </div>                          <div>
                             <p className="font-semibold text-white">Email Notifications</p>
-                            <p className="text-sm text-[#5C5C5C]">Booking confirmations, payment receipts</p>
+                            <p className="text-sm text-[#A0A0A0]">Booking confirmations, payment receipts</p>
                           </div>
                         </div>
                         <label className="relative inline-flex items-center cursor-pointer">
                           <input type="checkbox" defaultChecked className="sr-only peer" />
-                          <div className="relative w-11 h-6 bg-[#5C5C5C] peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#FFC72C]/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#FFC72C]"></div>
+                          <div className="relative w-11 h-6 bg-[#4A4A4A] peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#FFC72C]/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#FFC72C]"></div>
                         </label>
                       </div>
                     </div>
@@ -679,15 +713,14 @@ export default function ProfilePage() {
                             <svg className="w-6 h-6 text-[#FFC72C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>
-                          </div>
-                          <div>
+                          </div>                          <div>
                             <p className="font-semibold text-white">SMS Notifications</p>
-                            <p className="text-sm text-[#5C5C5C]">Urgent updates and maintenance alerts</p>
+                            <p className="text-sm text-[#A0A0A0]">Urgent updates and maintenance alerts</p>
                           </div>
                         </div>
                         <label className="relative inline-flex items-center cursor-pointer">
                           <input type="checkbox" className="sr-only peer" />
-                          <div className="relative w-11 h-6 bg-[#5C5C5C] peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#FFC72C]/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#FFC72C]"></div>
+                          <div className="relative w-11 h-6 bg-[#4A4A4A] peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#FFC72C]/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#FFC72C]"></div>
                         </label>
                       </div>
                     </div>
