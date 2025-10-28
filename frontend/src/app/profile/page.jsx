@@ -103,9 +103,7 @@ export default function ProfilePage() {
     };
 
     checkAuth();
-  }, [router]);
-
-  const handleUpdate = async (e) => {
+  }, [router]);  const handleUpdate = async (e) => {
     e.preventDefault();
     setLoading(true);
     setMessage("");
@@ -118,6 +116,8 @@ export default function ProfilePage() {
       formData.append("address", address);
       if (profilePic instanceof File) formData.append("profilePic", profilePic);
 
+      console.log("Updating user with ID:", user._id); // Debug log
+
       const response = await fetch(`http://localhost:5000/api/users/${user._id}`, {
         method: "PUT",
         headers: {
@@ -126,20 +126,42 @@ export default function ProfilePage() {
         body: formData,
       });
 
+      console.log("Response status:", response.status); // Debug log
+      console.log("Response headers:", response.headers.get("content-type")); // Debug log
+
+      // Check if response is JSON
+      const contentType = response.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        const text = await response.text();
+        console.error("Server returned non-JSON response:", text);
+        setMessage("Server error: The API endpoint may not exist or is returning an error page. Check the backend server.");
+        return;
+      }
+
       const data = await response.json();
+      console.log("Response data:", data); // Debug log
+      
       if (response.ok) {
-        localStorage.setItem("user", JSON.stringify(data));
+        // Update user state with the response data
+        const updatedUser = data.user || data;
+        setUser(updatedUser);
+        setName(updatedUser.name);
+        setPhone(updatedUser.phone || "");
+        setAddress(updatedUser.address || "");
+        if (updatedUser.profilePic) setProfilePic(updatedUser.profilePic);
+        
+        localStorage.setItem("user", JSON.stringify(updatedUser));
         setMessage("Profile updated successfully!");
       } else {
-        setMessage(data.message || "Error updating profile");
+        setMessage(data.message || `Error: ${response.status} - ${response.statusText}`);
       }
     } catch (error) {
-      console.error(error);
-      setMessage("Server error");
+      console.error("Update error:", error);
+      setMessage(`Error: ${error.message}. Please check if the backend server is running and the API endpoint exists.`);
     } finally {
       setLoading(false);
     }
-  };  if (!user) return (
+  };if (!user) return (
     <div className="min-h-screen bg-gradient-to-br from-[#1a1a1a] via-[#292929] to-[#000000] flex items-center justify-center p-4">
       <div className="bg-white/10 backdrop-blur-xl p-12 rounded-3xl shadow-2xl border-2 border-[#FFC72C]/50 max-w-md w-full text-center">
         <div className="relative">
