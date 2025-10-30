@@ -52,190 +52,282 @@ export default function RentalPage() {
       (filter === "all" || rental.type === filter) &&
       rental.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
   return (
-    <div className="rental-container" style={{ backgroundColor: '#F8F9FA', minHeight: '100vh' }}>
+    <div className="rental-container" style={{ backgroundColor: '#f5f7fa', minHeight: '100vh' }}>
       {/* Hero Section */}
       <div className="hero-section" style={{ 
-        backgroundColor: '#292929', 
-        padding: '80px 20px', 
-        background: 'linear-gradient(135deg, #292929 0%, #1a1a1a 100%)',
-        boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
+        background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
+        padding: '100px 20px 80px', 
+        position: 'relative',
+        overflow: 'hidden'
       }}>
-        <h1 className="hero-title" style={{ 
-          color: '#FFC72C', 
-          fontSize: '3rem', 
-          marginBottom: '20px',
-          fontWeight: '800',
-          textAlign: 'center',
-          letterSpacing: '-0.5px'
-        }}>
-          Find Your Perfect Rental
-        </h1>
-        <p className="hero-subtitle" style={{ 
-          color: '#E0E0E0', 
-          fontSize: '1.2rem', 
-          marginBottom: '40px',
-          textAlign: 'center',
-          maxWidth: '600px',
-          margin: '0 auto 40px'
-        }}>
-          Discover amazing properties and vehicles across Sri Lanka
-        </p>        {/* Search Bar */}
-        <div className="search-wrapper" style={{ position: 'relative', maxWidth: '600px', margin: '0 auto 30px' }}>
-          <input
-            type="text"
-            placeholder="Search rentals..."
-            className="search-input"
-            style={{
-              width: '100%',
-              padding: '18px 50px 18px 20px',
-              border: 'none',
-              borderRadius: '12px',
-              fontSize: '16px',
-              backgroundColor: '#FFFFFF',
-              color: '#000000',
-              boxShadow: '0 4px 15px rgba(0,0,0,0.1)',
-              transition: 'box-shadow 0.3s, transform 0.3s',
-              outline: 'none'
-            }}
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            onFocus={(e) => e.target.style.boxShadow = '0 6px 20px rgba(255,199,44,0.3)'}
-            onBlur={(e) => e.target.style.boxShadow = '0 4px 15px rgba(0,0,0,0.1)'}
-          />
-          <svg className="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5C5C5C" strokeWidth="2" style={{ position: 'absolute', right: '20px', top: '50%', transform: 'translateY(-50%)' }}>
-            <circle cx="11" cy="11" r="8"/>
-            <path d="m21 21-4.35-4.35"/>
-          </svg>
-        </div>
+        {/* Decorative circles */}
+        <div style={{ position: 'absolute', top: '-50px', right: '-50px', width: '300px', height: '300px', borderRadius: '50%', background: 'rgba(255, 199, 44, 0.1)', filter: 'blur(60px)' }}></div>
+        <div style={{ position: 'absolute', bottom: '-100px', left: '-100px', width: '400px', height: '400px', borderRadius: '50%', background: 'rgba(255, 199, 44, 0.08)', filter: 'blur(80px)' }}></div>
+        
+        <div style={{ position: 'relative', zIndex: 1, maxWidth: '1200px', margin: '0 auto' }}>
+          <h1 className="hero-title" style={{ 
+            color: '#FFFFFF', 
+            fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', 
+            marginBottom: '20px',
+            fontWeight: '800',
+            textAlign: 'center',
+            letterSpacing: '-1px',
+            textShadow: '0 4px 20px rgba(0,0,0,0.2)'
+          }}>
+            Find Your Perfect <span style={{ color: '#FFC72C' }}>Rental</span>
+          </h1>
+          <p className="hero-subtitle" style={{ 
+            color: '#cbd5e1', 
+            fontSize: '1.2rem', 
+            textAlign: 'center',
+            maxWidth: '650px',
+            margin: '0 auto 50px',
+            lineHeight: '1.6'
+          }}>
+            Discover amazing properties and vehicles across Sri Lanka with verified listings
+          </p>
 
-        {/* Filter Tabs */}
-        <div className="filter-tabs" style={{ display: 'flex', gap: '15px', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <button
-            className={`filter-btn ${filter === "all" ? "active" : ""}`}
-            onClick={() => setFilter("all")}
-            style={{
-              padding: '12px 30px',
-              border: '2px solid #FFC72C',
-              borderRadius: '25px',
-              fontSize: '16px',
-              cursor: 'pointer',
-              backgroundColor: filter === "all" ? '#FFC72C' : '#292929',
-              color: filter === "all" ? '#000000' : '#FFFFFF',
-              fontWeight: '600',
-              transition: 'all 0.3s'
-            }}
-          >
-            All
-          </button>
-          <button
-            className={`filter-btn ${filter === "property" ? "active" : ""}`}
-            onClick={() => setFilter("property")}
-            style={{
-              padding: '12px 30px',
-              border: '2px solid #FFC72C',
-              borderRadius: '25px',
-              fontSize: '16px',
-              cursor: 'pointer',
-              backgroundColor: filter === "property" ? '#FFC72C' : '#292929',
-              color: filter === "property" ? '#000000' : '#FFFFFF',
-              fontWeight: '600',
-              transition: 'all 0.3s'
-            }}
-          >
-            Properties
-          </button>
-          <button
-            className={`filter-btn ${filter === "vehicle" ? "active" : ""}`}
-            onClick={() => setFilter("vehicle")}
-            style={{
-              padding: '12px 30px',
-              border: '2px solid #FFC72C',
-              borderRadius: '25px',
-              fontSize: '16px',
-              cursor: 'pointer',
-              backgroundColor: filter === "vehicle" ? '#FFC72C' : '#292929',
-              color: filter === "vehicle" ? '#000000' : '#FFFFFF',
-              fontWeight: '600',
-              transition: 'all 0.3s'
-            }}
-          >
-            Vehicles
-          </button>
+          {/* Search Bar */}
+          <div className="search-wrapper" style={{ position: 'relative', maxWidth: '700px', margin: '0 auto 40px' }}>
+            <input
+              type="text"
+              placeholder="Search for properties, vehicles, locations..."
+              className="search-input"
+              style={{
+                width: '100%',
+                padding: '20px 60px 20px 24px',
+                border: '2px solid rgba(255, 199, 44, 0.2)',
+                borderRadius: '16px',
+                fontSize: '16px',
+                backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                backdropFilter: 'blur(10px)',
+                color: '#1e293b',
+                boxShadow: '0 10px 40px rgba(0,0,0,0.1)',
+                transition: 'all 0.3s ease',
+                outline: 'none'
+              }}
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onFocus={(e) => {
+                e.target.style.borderColor = '#FFC72C';
+                e.target.style.boxShadow = '0 15px 50px rgba(255,199,44,0.25)';
+                e.target.style.transform = 'translateY(-2px)';
+              }}
+              onBlur={(e) => {
+                e.target.style.borderColor = 'rgba(255, 199, 44, 0.2)';
+                e.target.style.boxShadow = '0 10px 40px rgba(0,0,0,0.1)';
+                e.target.style.transform = 'translateY(0)';
+              }}
+            />
+            <svg className="search-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#64748b" strokeWidth="2.5" style={{ position: 'absolute', right: '24px', top: '50%', transform: 'translateY(-50%)' }}>
+              <circle cx="11" cy="11" r="8"/>
+              <path d="m21 21-4.35-4.35"/>
+            </svg>
+          </div>
+
+          {/* Filter Tabs */}
+          <div className="filter-tabs" style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
+            {['all', 'property', 'vehicle'].map((type) => (
+              <button
+                key={type}
+                className={`filter-btn ${filter === type ? "active" : ""}`}
+                onClick={() => setFilter(type)}
+                style={{
+                  padding: '14px 32px',
+                  border: filter === type ? '2px solid #FFC72C' : '2px solid rgba(255, 255, 255, 0.1)',
+                  borderRadius: '30px',
+                  fontSize: '15px',
+                  cursor: 'pointer',
+                  backgroundColor: filter === type ? '#FFC72C' : 'rgba(255, 255, 255, 0.05)',
+                  backdropFilter: 'blur(10px)',
+                  color: filter === type ? '#000000' : '#FFFFFF',
+                  fontWeight: '600',
+                  transition: 'all 0.3s ease',
+                  textTransform: 'capitalize'
+                }}
+                onMouseEnter={(e) => {
+                  if (filter !== type) {
+                    e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                    e.currentTarget.style.borderColor = 'rgba(255, 199, 44, 0.5)';
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (filter !== type) {
+                    e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
+                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                    e.currentTarget.style.transform = 'translateY(0)';
+                  }
+                }}
+              >
+                {type === 'all' ? 'All Rentals' : type === 'property' ? 'Properties' : 'Vehicles'}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>      {/* Rental Cards Grid */}
-      <div className="rentals-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '30px', padding: '50px 20px', maxWidth: '1200px', margin: '0 auto' }}>
+      </div>
+
+      {/* Rental Cards Grid */}
+      <div className="rentals-grid" style={{ 
+        display: 'grid', 
+        gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', 
+        gap: '32px', 
+        padding: '60px 20px', 
+        maxWidth: '1280px', 
+        margin: '0 auto' 
+      }}>
         {filteredRentals.map((rental) => (
           <div 
             key={rental.id} 
             className="rental-card" 
             style={{ 
               backgroundColor: '#FFFFFF', 
-              borderRadius: '16px', 
+              borderRadius: '20px', 
               overflow: 'hidden', 
-              transition: 'transform 0.3s, box-shadow 0.3s',
-              boxShadow: '0 2px 15px rgba(0,0,0,0.08)',
-              cursor: 'pointer'
+              transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
+              cursor: 'pointer',
+              border: '1px solid #e2e8f0'
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-8px)';
-              e.currentTarget.style.boxShadow = '0 8px 30px rgba(255,199,44,0.2)';
+              e.currentTarget.style.transform = 'translateY(-12px)';
+              e.currentTarget.style.boxShadow = '0 20px 60px rgba(255,199,44,0.15), 0 0 0 1px rgba(255,199,44,0.1)';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = '0 2px 15px rgba(0,0,0,0.08)';
+              e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.06)';
             }}
           >
-            <div className="card-image-wrapper" style={{ position: 'relative', overflow: 'hidden' }}>
+            <div className="card-image-wrapper" style={{ position: 'relative', overflow: 'hidden', height: '240px' }}>
               <img
                 src={rental.image}
                 alt={rental.title}
                 className="card-image"
-                style={{ width: '100%', height: '220px', objectFit: 'cover', transition: 'transform 0.3s' }}
-                onMouseEnter={(e) => e.target.style.transform = 'scale(1.05)'}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.6s ease' }}
+                onMouseEnter={(e) => e.target.style.transform = 'scale(1.1)'}
                 onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
               />
-              <span className="card-badge" style={{ position: 'absolute', top: '15px', right: '15px', backgroundColor: '#FFC72C', color: '#000000', padding: '8px 16px', borderRadius: '20px', fontSize: '13px', fontWeight: '700', textTransform: 'capitalize', boxShadow: '0 2px 10px rgba(0,0,0,0.15)' }}>
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.3), transparent)' }}></div>
+              <span className="card-badge" style={{ 
+                position: 'absolute', 
+                top: '16px', 
+                right: '16px', 
+                backgroundColor: '#FFC72C', 
+                color: '#000000', 
+                padding: '8px 18px', 
+                borderRadius: '25px', 
+                fontSize: '13px', 
+                fontWeight: '700', 
+                textTransform: 'uppercase',
+                letterSpacing: '0.5px',
+                boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+                backdropFilter: 'blur(10px)'
+              }}>
                 {rental.type}
               </span>
             </div>
 
-            <div className="card-content" style={{ padding: '20px' }}>
-              <h3 className="card-title" style={{ color: '#292929', fontSize: '1.3rem', marginBottom: '12px', fontWeight: '700' }}>
+            <div className="card-content" style={{ padding: '24px' }}>
+              <h3 className="card-title" style={{ 
+                color: '#1e293b', 
+                fontSize: '1.4rem', 
+                marginBottom: '14px', 
+                fontWeight: '700',
+                lineHeight: '1.3'
+              }}>
                 {rental.title}
               </h3>
-                <div className="card-location" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#5C5C5C', marginBottom: '12px' }}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C5C5C" strokeWidth="2">
+
+              <div className="card-location" style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '8px', 
+                color: '#64748b', 
+                marginBottom: '16px',
+                fontSize: '0.95rem'
+              }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFC72C" strokeWidth="2">
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
                   <circle cx="12" cy="10" r="3"/>
                 </svg>
-                <span>{rental.location}</span>
+                <span style={{ fontWeight: '500' }}>{rental.location}</span>
               </div>
 
-              <div className="card-rating" style={{ display: 'flex', gap: '10px', marginBottom: '15px', color: '#5C5C5C' }}>
-                <span className="rating-stars" style={{ color: '#FFC72C', fontWeight: '600' }}>⭐ {rental.rating}</span>
-                <span className="rating-reviews">({rental.reviews} reviews)</span>
-              </div>              <div className="card-footer" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '15px', borderTop: '1px solid #E0E0E0' }}>
+              <div className="card-rating" style={{ 
+                display: 'flex', 
+                gap: '12px', 
+                alignItems: 'center',
+                marginBottom: '20px', 
+                color: '#64748b',
+                fontSize: '0.9rem'
+              }}>
+                <span className="rating-stars" style={{ 
+                  color: '#FFC72C', 
+                  fontWeight: '700',
+                  fontSize: '1rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '4px'
+                }}>
+                  ⭐ {rental.rating}
+                </span>
+                <span className="rating-reviews" style={{ fontWeight: '500' }}>({rental.reviews} reviews)</span>
+              </div>
+
+              <div className="card-footer" style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center', 
+                paddingTop: '20px', 
+                borderTop: '2px solid #f1f5f9' 
+              }}>
                 <div className="card-price">
-                  <span className="price-amount" style={{ color: '#292929', fontSize: '1.4rem', fontWeight: '700' }}>
-                    Rs. {rental.price.toLocaleString()}
-                  </span>
-                  <span className="price-period" style={{ color: '#5C5C5C', fontSize: '0.9rem' }}>/day</span>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                    <span className="price-amount" style={{ 
+                      color: '#1e293b', 
+                      fontSize: '1.6rem', 
+                      fontWeight: '800',
+                      letterSpacing: '-0.5px'
+                    }}>
+                      Rs. {rental.price.toLocaleString()}
+                    </span>
+                    <span className="price-period" style={{ color: '#94a3b8', fontSize: '0.85rem', fontWeight: '500' }}>/day</span>
+                  </div>
                 </div>
                 <button 
                   className="view-btn" 
-                  style={{ backgroundColor: '#FFC72C', color: '#000000', border: 'none', padding: '10px 20px', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: '600', transition: 'all 0.3s' }}
+                  style={{ 
+                    backgroundColor: '#1e293b', 
+                    color: '#FFFFFF', 
+                    border: 'none', 
+                    padding: '12px 24px', 
+                    borderRadius: '12px', 
+                    cursor: 'pointer', 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    gap: '8px', 
+                    fontWeight: '600',
+                    fontSize: '0.95rem',
+                    transition: 'all 0.3s ease',
+                    boxShadow: '0 4px 12px rgba(30, 41, 59, 0.15)'
+                  }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = '#FFD700';
-                    e.currentTarget.style.transform = 'translateX(3px)';
+                    e.currentTarget.style.backgroundColor = '#FFC72C';
+                    e.currentTarget.style.color = '#000000';
+                    e.currentTarget.style.transform = 'translateX(4px)';
+                    e.currentTarget.style.boxShadow = '0 6px 20px rgba(255, 199, 44, 0.3)';
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = '#FFC72C';
+                    e.currentTarget.style.backgroundColor = '#1e293b';
+                    e.currentTarget.style.color = '#FFFFFF';
                     e.currentTarget.style.transform = 'translateX(0)';
+                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(30, 41, 59, 0.15)';
                   }}
                 >
                   View Details
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                     <path d="M5 12h14M12 5l7 7-7 7"/>
                   </svg>
                 </button>
@@ -246,8 +338,26 @@ export default function RentalPage() {
       </div>
 
       {filteredRentals.length === 0 && (
-        <div className="no-results" style={{ textAlign: 'center', padding: '60px 20px', color: '#5C5C5C', fontSize: '1.2rem' }}>
-          <p>No rentals found. Try adjusting your filters.</p>
+        <div className="no-results" style={{ 
+          textAlign: 'center', 
+          padding: '80px 20px',
+          maxWidth: '500px',
+          margin: '0 auto'
+        }}>
+          <div style={{ 
+            fontSize: '4rem', 
+            marginBottom: '20px',
+            opacity: '0.3'
+          }}>🔍</div>
+          <h3 style={{ 
+            color: '#1e293b', 
+            fontSize: '1.5rem', 
+            fontWeight: '700',
+            marginBottom: '12px'
+          }}>No rentals found</h3>
+          <p style={{ color: '#64748b', fontSize: '1.1rem' }}>
+            Try adjusting your filters or search terms
+          </p>
         </div>
       )}
     </div>
