@@ -83,18 +83,20 @@ export default function ProfilePage() {
           localStorage.removeItem("user");
           router.push("/login");
           return;
-        }
-
-        const profile = await response.json();
+        }        const profile = await response.json();
         const parsedUser = JSON.parse(userData);
-        setUser(parsedUser);
-        setName(parsedUser.name);
-        setPhone(parsedUser.phone || "");
-        setAddress(parsedUser.address || "");
-        setProfilePic(parsedUser.profilePic || null);
-
-        if (parsedUser.role === "Owner") {
-          fetchUserProperties(token, parsedUser._id);
+        console.log("Parsed user from localStorage:", parsedUser); // Debug log
+        console.log("Profile from API:", profile); // Debug log
+        
+        // Use profile data from API if localStorage doesn't have _id
+        const userToUse = parsedUser._id ? parsedUser : profile;
+        
+        setUser(userToUse);
+        setName(userToUse.name);
+        setPhone(userToUse.phone || "");
+        setAddress(userToUse.address || "");
+        setProfilePic(userToUse.profilePic || null);        if (userToUse.role === "Owner" && userToUse._id) {
+          fetchUserProperties(token, userToUse._id);
         }
       } catch (error) {
         console.error("Error validating token:", error);
@@ -108,22 +110,34 @@ export default function ProfilePage() {
     setLoading(true);
     setMessage("");
 
-    try {
-      const token = localStorage.getItem("token");
-      const formData = new FormData();
-      formData.append("name", name);
-      formData.append("phone", phone);
-      formData.append("address", address);
-      if (profilePic instanceof File) formData.append("profilePic", profilePic);
+    console.log("Current user state:", user); // Debug log
+    console.log("User ID:", user?._id); // Debug log
 
+    if (!user || !user._id) {
+      setMessage("User information is not available. Please refresh the page.");
+      setLoading(false);
+      return;
+    }try {
+      const token = localStorage.getItem("token");
+      
       console.log("Updating user with ID:", user._id); // Debug log
 
       const response = await fetch(`http://localhost:5000/api/users/${user._id}`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,
+          ...(profilePic instanceof File ? {} : { "Content-Type": "application/json" }),
         },
-        body: formData,
+        body: profilePic instanceof File 
+          ? (() => {
+              const formData = new FormData();
+              formData.append("name", name);
+              formData.append("phone", phone);
+              formData.append("address", address);
+              formData.append("profilePic", profilePic);
+              return formData;
+            })()
+          : JSON.stringify({ name, phone, address }),
       });
 
       console.log("Response status:", response.status); // Debug log
@@ -344,9 +358,7 @@ export default function ProfilePage() {
                   <KeyIcon className="w-5 h-5 text-[#FFC72C]" />
                   <span className="text-sm font-medium text-[#FFC72C]">Verified Landlord</span>
                 </div>
-              </div>
-
-              <form onSubmit={handleUpdate} className="grid grid-cols-1 lg:grid-cols-2 gap-6">{/* Profile Picture Section */}
+              </div>                <form onSubmit={handleUpdate} className="grid grid-cols-1 lg:grid-cols-2 gap-6">{/* Profile Picture Section */}
                 <div className="lg:col-span-2 space-y-4">
                   <label className="block text-sm font-semibold text-white mb-2">Profile Picture</label>
                   <div className="relative">

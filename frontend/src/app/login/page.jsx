@@ -52,25 +52,39 @@ export default function LoginPage() {
     
     setError("");
     setSuccess("");
-    setIsLoading(true);
-
-    try {
+    setIsLoading(true);    try {
       const res = await fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        credentials: 'include',
         body: JSON.stringify({ email, password }),
       });
 
+      if (!res.ok) {
+        let errorMessage = "Login failed";
+        try {
+          const errorData = await res.json();
+          errorMessage = errorData.message || errorMessage;
+        } catch (parseError) {
+          errorMessage = `Server error (${res.status})`;
+        }
+        throw new Error(errorMessage);
+      }
+
       const data = await res.json();
-
-      if (!res.ok) throw new Error(data.message || "Login failed");
-
       setSuccess("Login successful! Redirecting...");
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
       setTimeout(() => router.push("/dashboard"), 1500);
     } catch (err) {
-      setError(err.message);
+      if (err.name === 'TypeError' && err.message.includes('fetch')) {
+        setError("Cannot connect to server. Please make sure the backend is running on port 5000.");
+      } else {
+        setError(err.message);
+      }
     } finally {
       setIsLoading(false);
     }
