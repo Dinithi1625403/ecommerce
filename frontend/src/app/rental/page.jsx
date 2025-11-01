@@ -1,12 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import "./rental.css";
+
 
 export default function RentalPage() {
   const [rentals, setRentals] = useState([]);
   const [filter, setFilter] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedRental, setSelectedRental] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const mockRentals = [
@@ -46,12 +48,21 @@ export default function RentalPage() {
     ];
     setRentals(mockRentals);
   }, []);
-
   const filteredRentals = rentals.filter(
     (rental) =>
       (filter === "all" || rental.type === filter) &&
       rental.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const handleViewDetails = (rental) => {
+    setSelectedRental(rental);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setSelectedRental(null);
+  };
 
   return (
     <div className="rental-container" style={{ backgroundColor: '#f5f7fa', minHeight: '100vh' }}>
@@ -295,9 +306,9 @@ export default function RentalPage() {
                     </span>
                     <span className="price-period" style={{ color: '#94a3b8', fontSize: '0.85rem', fontWeight: '500' }}>/day</span>
                   </div>
-                </div>
-                <button 
+                </div>                <button 
                   className="view-btn" 
+                  onClick={() => handleViewDetails(rental)}
                   style={{ 
                     backgroundColor: '#1e293b', 
                     color: '#FFFFFF', 
@@ -356,8 +367,270 @@ export default function RentalPage() {
             marginBottom: '12px'
           }}>No rentals found</h3>
           <p style={{ color: '#64748b', fontSize: '1.1rem' }}>
-            Try adjusting your filters or search terms
-          </p>
+            Try adjusting your filters or search terms          </p>
+        </div>
+      )}
+
+      {/* Modal for Rental Details */}
+      {showModal && selectedRental && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 1000,
+          padding: '20px'
+        }} onClick={closeModal}>
+          <div style={{
+            backgroundColor: '#FFFFFF',
+            borderRadius: '24px',
+            maxWidth: '800px',
+            width: '100%',
+            maxHeight: '90vh',
+            overflow: 'auto',
+            position: 'relative',
+            boxShadow: '0 25px 100px rgba(0,0,0,0.3)'
+          }} onClick={(e) => e.stopPropagation()}>
+            
+            {/* Close Button */}
+            <button
+              onClick={closeModal}
+              style={{
+                position: 'absolute',
+                top: '20px',
+                right: '20px',
+                background: 'rgba(255, 255, 255, 0.9)',
+                border: 'none',
+                borderRadius: '50%',
+                width: '40px',
+                height: '40px',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '18px',
+                color: '#1e293b',
+                zIndex: 1001,
+                transition: 'all 0.3s ease',
+                boxShadow: '0 4px 15px rgba(0,0,0,0.1)'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#FFC72C';
+                e.currentTarget.style.transform = 'scale(1.1)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
+                e.currentTarget.style.transform = 'scale(1)';
+              }}
+            >
+              ✕
+            </button>
+
+            {/* Modal Image */}
+            <div style={{ position: 'relative', height: '300px', overflow: 'hidden', borderRadius: '24px 24px 0 0' }}>
+              <img
+                src={selectedRental.image}
+                alt={selectedRental.title}
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              />
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.4), transparent)' }}></div>
+              <span style={{
+                position: 'absolute',
+                bottom: '20px',
+                left: '20px',
+                backgroundColor: '#FFC72C',
+                color: '#000000',
+                padding: '10px 20px',
+                borderRadius: '30px',
+                fontSize: '14px',
+                fontWeight: '700',
+                textTransform: 'uppercase',
+                letterSpacing: '0.5px'
+              }}>
+                {selectedRental.type}
+              </span>
+            </div>
+
+            {/* Modal Content */}
+            <div style={{ padding: '40px' }}>
+              <h2 style={{
+                color: '#1e293b',
+                fontSize: '2rem',
+                fontWeight: '800',
+                marginBottom: '16px',
+                lineHeight: '1.2'
+              }}>
+                {selectedRental.title}
+              </h2>
+
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px',
+                color: '#64748b',
+                marginBottom: '24px',
+                fontSize: '1.1rem'
+              }}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFC72C" strokeWidth="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+                <span style={{ fontWeight: '600' }}>{selectedRental.location}</span>
+              </div>
+
+              <div style={{
+                display: 'flex',
+                gap: '16px',
+                alignItems: 'center',
+                marginBottom: '32px',
+                color: '#64748b',
+                fontSize: '1rem'
+              }}>
+                <span style={{
+                  color: '#FFC72C',
+                  fontWeight: '700',
+                  fontSize: '1.2rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px'
+                }}>
+                  ⭐ {selectedRental.rating}
+                </span>
+                <span style={{ fontWeight: '600' }}>({selectedRental.reviews} reviews)</span>
+              </div>
+
+              <div style={{
+                backgroundColor: '#f8fafc',
+                padding: '24px',
+                borderRadius: '16px',
+                marginBottom: '32px'
+              }}>
+                <h3 style={{
+                  color: '#1e293b',
+                  fontSize: '1.3rem',
+                  fontWeight: '700',
+                  marginBottom: '16px'
+                }}>
+                  Description
+                </h3>
+                <p style={{
+                  color: '#64748b',
+                  fontSize: '1rem',
+                  lineHeight: '1.6',
+                  marginBottom: '20px'
+                }}>
+                  {selectedRental.type === 'property' 
+                    ? 'This beautiful property offers modern amenities and comfortable living spaces. Perfect for both short and long-term stays with excellent accessibility to local attractions and facilities.'
+                    : 'This premium vehicle is well-maintained and perfect for your transportation needs. Features modern safety equipment and comfort features for an enjoyable driving experience.'
+                  }
+                </p>
+
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
+                  <div>
+                    <h4 style={{ color: '#1e293b', fontWeight: '600', marginBottom: '8px' }}>Features</h4>
+                    <ul style={{ color: '#64748b', listStyle: 'none', padding: 0 }}>
+                      {selectedRental.type === 'property' ? (
+                        <>
+                          <li style={{ marginBottom: '4px' }}>• Fully Furnished</li>
+                          <li style={{ marginBottom: '4px' }}>• Air Conditioning</li>
+                          <li style={{ marginBottom: '4px' }}>• WiFi Included</li>
+                          <li style={{ marginBottom: '4px' }}>• Parking Available</li>
+                        </>
+                      ) : (
+                        <>
+                          <li style={{ marginBottom: '4px' }}>• GPS Navigation</li>
+                          <li style={{ marginBottom: '4px' }}>• Air Conditioning</li>
+                          <li style={{ marginBottom: '4px' }}>• Insurance Included</li>
+                          <li style={{ marginBottom: '4px' }}>• 24/7 Support</li>
+                        </>
+                      )}
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 style={{ color: '#1e293b', fontWeight: '600', marginBottom: '8px' }}>Availability</h4>
+                    <p style={{ color: '#64748b', marginBottom: '8px' }}>Available Now</p>
+                    <p style={{ color: '#64748b', fontSize: '0.9rem' }}>Minimum: 1 day</p>
+                  </div>
+                </div>
+              </div>
+
+              <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                paddingTop: '24px',
+                borderTop: '2px solid #f1f5f9'
+              }}>
+                <div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                    <span style={{
+                      color: '#1e293b',
+                      fontSize: '2.2rem',
+                      fontWeight: '800',
+                      letterSpacing: '-1px'
+                    }}>
+                      Rs. {selectedRental.price.toLocaleString()}
+                    </span>
+                    <span style={{ color: '#94a3b8', fontSize: '1rem', fontWeight: '500' }}>/day</span>
+                  </div>
+                </div>
+                
+                <div style={{ display: 'flex', gap: '12px' }}>
+                  <button
+                    onClick={closeModal}
+                    style={{
+                      backgroundColor: '#f1f5f9',
+                      color: '#64748b',
+                      border: 'none',
+                      padding: '14px 28px',
+                      borderRadius: '12px',
+                      cursor: 'pointer',
+                      fontWeight: '600',
+                      fontSize: '1rem',
+                      transition: 'all 0.3s ease'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = '#e2e8f0';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = '#f1f5f9';
+                    }}
+                  >
+                    Close
+                  </button>
+                  <button
+                    style={{
+                      backgroundColor: '#FFC72C',
+                      color: '#000000',
+                      border: 'none',
+                      padding: '14px 32px',
+                      borderRadius: '12px',
+                      cursor: 'pointer',
+                      fontWeight: '700',
+                      fontSize: '1rem',
+                      transition: 'all 0.3s ease',
+                      boxShadow: '0 4px 20px rgba(255, 199, 44, 0.3)'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = 'translateY(-2px)';
+                      e.currentTarget.style.boxShadow = '0 8px 30px rgba(255, 199, 44, 0.4)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'translateY(0)';
+                      e.currentTarget.style.boxShadow = '0 4px 20px rgba(255, 199, 44, 0.3)';
+                    }}
+                  >
+                    Book Now
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </div>
