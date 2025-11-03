@@ -61,41 +61,35 @@ export default function RentalPage() {
     setSelectedRental(null);
   };
 
-  return (
-    <div style={{ 
-      backgroundColor: '#fafafa',
+  return (    <div style={{ 
+      backgroundColor: '#ffffff',
       minHeight: '100vh',
-      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
-    }}>
-      {/* Hero Section */}
+      fontFamily: 'Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+    }}>      {/* Hero Section */}
       <div style={{ 
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        padding: '120px 20px 100px',
+        background: 'linear-gradient(180deg, #0f172a 0%, #1e293b 100%)',
+        padding: '120px 20px 80px',
         position: 'relative',
         overflow: 'hidden'
       }}>
-        {/* Animated background shapes */}
-        <div style={{ position: 'absolute', top: '10%', left: '5%', width: '400px', height: '400px', borderRadius: '50%', background: 'rgba(255, 255, 255, 0.1)', filter: 'blur(80px)', animation: 'float 6s ease-in-out infinite' }}></div>
-        <div style={{ position: 'absolute', bottom: '10%', right: '10%', width: '300px', height: '300px', borderRadius: '50%', background: 'rgba(255, 255, 255, 0.08)', filter: 'blur(60px)', animation: 'float 8s ease-in-out infinite reverse' }}></div>
+        {/* Minimal grid overlay */}
+        <div style={{ 
+          position: 'absolute', 
+          inset: 0, 
+          backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0)',
+          backgroundSize: '40px 40px',
+          opacity: 0.1
+        }}></div>
         
-        <div style={{ position: 'relative', zIndex: 1, maxWidth: '1200px', margin: '0 auto' }}>
-          <h1 style={{ 
+        <div style={{ position: 'relative', zIndex: 1, maxWidth: '1200px', margin: '0 auto' }}>          <h1 style={{ 
             color: '#FFFFFF',
-            fontSize: 'clamp(3rem, 6vw, 4.5rem)',
+            fontSize: 'clamp(2.5rem, 5vw, 4rem)',
             marginBottom: '24px',
-            fontWeight: '900',
+            fontWeight: '600',
             textAlign: 'center',
-            letterSpacing: '-2px',
-            lineHeight: '1.1'
+            letterSpacing: '-1px'
           }}>
-            Discover Your Next
-            <br />
-            <span style={{ 
-              background: 'linear-gradient(90deg, #FFC72C 0%, #FFD95A 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text'
-            }}>Adventure</span>
+            Premium Rental Services
           </h1>
           <p style={{ 
             color: 'rgba(255, 255, 255, 0.9)',
@@ -107,58 +101,50 @@ export default function RentalPage() {
             fontWeight: '300'
           }}>
             Premium properties and luxury vehicles across Sri Lanka's most beautiful locations
-          </p>
-
-          {/* Enhanced Search Bar */}
+          </p>          {/* Search Bar */}
           <div style={{ 
             position: 'relative',
-            maxWidth: '800px',
+            maxWidth: '600px',
             margin: '0 auto 50px'
           }}>
-            <div style={{
-              position: 'absolute',
-              inset: '-2px',
-              background: 'linear-gradient(90deg, #FFC72C, #FFD95A, #FFC72C)',
-              borderRadius: '20px',
-              opacity: 0.6,
-              filter: 'blur(8px)',
-              animation: 'pulse 3s ease-in-out infinite'
-            }}></div>
             <input
               type="text"
-              placeholder="Where would you like to go?"
+              placeholder="Search locations, properties, or vehicles..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               style={{
-                position: 'relative',
                 width: '100%',
-                padding: '24px 70px 24px 28px',
-                border: 'none',
-                borderRadius: '18px',
-                fontSize: '17px',
-                backgroundColor: 'rgba(255, 255, 255, 0.98)',
-                color: '#1e293b',
-                boxShadow: '0 20px 60px rgba(0, 0, 0, 0.15)',
+                padding: '18px 60px 18px 24px',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                borderRadius: '12px',
+                fontSize: '16px',
+                backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                backdropFilter: 'blur(20px)',
+                color: '#ffffff',
                 outline: 'none',
-                transition: 'all 0.3s ease'
+                transition: 'all 0.3s ease',
+                '::placeholder': { color: 'rgba(255, 255, 255, 0.7)' }
+              }}
+              onFocus={(e) => {
+                e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                e.target.style.color = '#1e293b';
+                e.target.style.border = '1px solid rgba(255, 255, 255, 0.3)';
+              }}
+              onBlur={(e) => {
+                e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                e.target.style.color = '#ffffff';
+                e.target.style.border = '1px solid rgba(255, 255, 255, 0.2)';
               }}
             />
             <div style={{
               position: 'absolute',
-              right: '8px',
+              right: '16px',
               top: '50%',
               transform: 'translateY(-50%)',
-              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-              width: '48px',
-              height: '48px',
-              borderRadius: '12px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              boxShadow: '0 4px 15px rgba(102, 126, 234, 0.4)'
+              color: 'rgba(255, 255, 255, 0.6)',
+              pointerEvents: 'none'
             }}>
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.5">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <circle cx="11" cy="11" r="8"/>
                 <path d="m21 21-4.35-4.35"/>
               </svg>
@@ -202,9 +188,8 @@ export default function RentalPage() {
                   if (filter !== type) {
                     e.currentTarget.style.background = 'rgba(255, 255, 255, 0.15)';
                   }
-                }}
-              >
-                {type === 'all' ? '✨ All Rentals' : type === 'property' ? '🏠 Properties' : '🚗 Vehicles'}
+                }}              >
+                {type === 'all' ? 'All Rentals' : type === 'property' ? 'Properties' : 'Vehicles'}
               </button>
             ))}
           </div>
@@ -218,26 +203,25 @@ export default function RentalPage() {
         padding: '0 20px',
         position: 'relative',
         zIndex: 10
-      }}>
-        <div style={{
+      }}>        <div style={{
           background: '#FFFFFF',
-          borderRadius: '24px',
+          borderRadius: '16px',
           padding: '40px',
-          boxShadow: '0 20px 60px rgba(0, 0, 0, 0.1)',
+          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+          border: '1px solid rgba(226, 232, 240, 0.8)',
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-          gap: '30px',
+          gap: '40px',
           textAlign: 'center'
         }}>
           {[
-            { icon: '🏆', value: '500+', label: 'Premium Listings' },
-            { icon: '⭐', value: '4.8', label: 'Average Rating' },
-            { icon: '👥', value: '10K+', label: 'Happy Customers' },
+            { value: '500+', label: 'Premium Listings' },
+            { value: '4.8', label: 'Average Rating' },
+            { value: '10K+', label: 'Happy Customers' },
           ].map((stat, i) => (
             <div key={i}>
-              <div style={{ fontSize: '2.5rem', marginBottom: '8px' }}>{stat.icon}</div>
-              <div style={{ fontSize: '2rem', fontWeight: '800', color: '#1e293b', marginBottom: '4px' }}>{stat.value}</div>
-              <div style={{ fontSize: '0.95rem', color: '#64748b', fontWeight: '500' }}>{stat.label}</div>
+              <div style={{ fontSize: '2.5rem', fontWeight: '700', color: '#1e293b', marginBottom: '8px' }}>{stat.value}</div>
+              <div style={{ fontSize: '0.95rem', color: '#64748b', fontWeight: '500', letterSpacing: '0.5px' }}>{stat.label}</div>
             </div>
           ))}
         </div>
@@ -290,25 +274,21 @@ export default function RentalPage() {
                 position: 'absolute',
                 inset: 0,
                 background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%)'
-              }}></div>
-              <div style={{ 
+              }}></div>              <div style={{ 
                 position: 'absolute',
                 top: '20px',
                 right: '20px',
-                background: rental.type === 'property' 
-                  ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
-                  : 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                background: 'rgba(0, 0, 0, 0.7)',
                 color: '#FFFFFF',
-                padding: '10px 20px',
-                borderRadius: '30px',
-                fontSize: '13px',
-                fontWeight: '700',
+                padding: '6px 12px',
+                borderRadius: '6px',
+                fontSize: '12px',
+                fontWeight: '500',
                 textTransform: 'uppercase',
-                letterSpacing: '1px',
-                boxShadow: '0 8px 20px rgba(0, 0, 0, 0.3)',
+                letterSpacing: '0.5px',
                 backdropFilter: 'blur(10px)'
               }}>
-                {rental.type === 'property' ? '🏠 Property' : '🚗 Vehicle'}
+                {rental.type}
               </div>
               <div style={{
                 position: 'absolute',
@@ -358,7 +338,7 @@ export default function RentalPage() {
                   padding: '8px 16px',
                   borderRadius: '12px'
                 }}>
-                  <span style={{ fontSize: '1.1rem' }}>⭐</span>
+                  <span style={{ fontSize: '1.1rem' }}>★</span>
                   <span style={{ fontWeight: '800', color: '#1e293b', fontSize: '1rem' }}>
                     {rental.rating}
                   </span>
@@ -432,8 +412,7 @@ export default function RentalPage() {
           padding: '100px 20px',
           maxWidth: '600px',
           margin: '0 auto'
-        }}>
-          <div style={{ 
+        }}>          <div style={{ 
             fontSize: '5rem',
             marginBottom: '24px',
             opacity: '0.2',
@@ -594,7 +573,7 @@ export default function RentalPage() {
                   padding: '12px 20px',
                   borderRadius: '16px'
                 }}>
-                  <span style={{ fontSize: '1.3rem' }}>⭐</span>
+                  <span style={{ fontSize: '1.3rem' }}>★</span>
                   <span style={{ fontWeight: '800', color: '#1e293b', fontSize: '1.2rem' }}>
                     {selectedRental.rating}
                   </span>
@@ -694,31 +673,28 @@ export default function RentalPage() {
                   </div>
                 </div>
                 
-                <button
-                  style={{
-                    background: 'linear-gradient(135deg, #FFC72C 0%, #FFD95A 100%)',
-                    color: '#000000',
+                <button                  style={{
+                    background: 'linear-gradient(135deg, #1e293b 0%, #334155 100%)',
+                    color: '#FFFFFF',
                     border: 'none',
-                    padding: '18px 48px',
-                    borderRadius: '16px',
+                    padding: '16px 32px',
+                    borderRadius: '8px',
                     cursor: 'pointer',
-                    fontWeight: '800',
-                    fontSize: '1.1rem',
+                    fontWeight: '600',
+                    fontSize: '1rem',
                     transition: 'all 0.3s ease',
-                    boxShadow: '0 8px 30px rgba(255, 199, 44, 0.35)',
-                    textTransform: 'uppercase',
-                    letterSpacing: '1px'
+                    boxShadow: '0 4px 15px rgba(30, 41, 59, 0.3)'
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-4px) scale(1.05)';
-                    e.currentTarget.style.boxShadow = '0 15px 50px rgba(255, 199, 44, 0.5)';
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.boxShadow = '0 8px 25px rgba(30, 41, 59, 0.4)';
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                    e.currentTarget.style.boxShadow = '0 8px 30px rgba(255, 199, 44, 0.35)';
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = '0 4px 15px rgba(30, 41, 59, 0.3)';
                   }}
                 >
-                  Book Now 🚀
+                  Book Now
                 </button>
               </div>
             </div>
