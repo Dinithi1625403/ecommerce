@@ -67,18 +67,26 @@ export default function RentalPage() {
       fontFamily: 'Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
     }}>      {/* Hero Section */}
       <div style={{ 
-        background: 'linear-gradient(180deg, #0f172a 0%, #1e293b 100%)',
-        padding: '120px 20px 80px',
+        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)',
+        padding: '140px 20px 100px',
         position: 'relative',
         overflow: 'hidden'
       }}>
-        {/* Minimal grid overlay */}
+        {/* Animated gradient overlay */}
         <div style={{ 
           position: 'absolute', 
           inset: 0, 
-          backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0)',
-          backgroundSize: '40px 40px',
-          opacity: 0.1
+          background: 'radial-gradient(circle at 30% 70%, rgba(255,255,255,0.1) 0%, transparent 50%)',
+          animation: 'pulse 4s ease-in-out infinite'
+        }}></div>
+        {/* Modern dot pattern */}
+        <div style={{ 
+          position: 'absolute', 
+          inset: 0, 
+          backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.2) 1px, transparent 0)',
+          backgroundSize: '60px 60px',
+          opacity: 0.3,
+          animation: 'float 6s ease-in-out infinite'
         }}></div>
         
         <div style={{ position: 'relative', zIndex: 1, maxWidth: '1200px', margin: '0 auto' }}>          <h1 style={{ 
@@ -213,15 +221,31 @@ export default function RentalPage() {
           gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
           gap: '40px',
           textAlign: 'center'
-        }}>
-          {[
-            { value: '500+', label: 'Premium Listings' },
-            { value: '4.8', label: 'Average Rating' },
-            { value: '10K+', label: 'Happy Customers' },
+        }}>          {[
+            { value: '500+', label: 'Premium Listings', icon: '🏆' },
+            { value: '4.8', label: 'Average Rating', icon: '⭐' },
+            { value: '10K+', label: 'Happy Customers', icon: '❤️' },
+            { value: '24/7', label: 'Support Available', icon: '🕒' },
           ].map((stat, i) => (
-            <div key={i}>
-              <div style={{ fontSize: '2.5rem', fontWeight: '700', color: '#1e293b', marginBottom: '8px' }}>{stat.value}</div>
-              <div style={{ fontSize: '0.95rem', color: '#64748b', fontWeight: '500', letterSpacing: '0.5px' }}>{stat.label}</div>
+            <div key={i} style={{ 
+              padding: '20px',
+              borderRadius: '20px',
+              background: 'linear-gradient(135deg, #f8fafc 0%, #ffffff 100%)',
+              border: '1px solid rgba(226, 232, 240, 0.6)',
+              transition: 'all 0.3s ease',
+              cursor: 'pointer'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-8px)';
+              e.currentTarget.style.boxShadow = '0 20px 40px rgba(102, 126, 234, 0.1)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = 'none';
+            }}>
+              <div style={{ fontSize: '2rem', marginBottom: '12px', opacity: 0.8 }}>{stat.icon}</div>
+              <div style={{ fontSize: '2.5rem', fontWeight: '900', color: '#1e293b', marginBottom: '8px', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>{stat.value}</div>
+              <div style={{ fontSize: '0.95rem', color: '#64748b', fontWeight: '600', letterSpacing: '0.5px' }}>{stat.label}</div>
             </div>
           ))}
         </div>
