@@ -16,7 +16,7 @@ router.get("/my-rentals", async (req, res) => {
 });
 
 // 🔁 Return a rental
-router.post("/return/:id", async (req, res) => {
+router.post("/rentals/return/:id", async (req, res) => {
   try {
     const rental = await Rental.findById(req.params.id);
     if (!rental) return res.status(404).json({ message: "Rental not found" });
@@ -31,7 +31,7 @@ router.post("/return/:id", async (req, res) => {
 });
 
 // 📆 Extend a rental
-router.post("/extend/:id", async (req, res) => {
+router.post("/rentals/extend/:id", async (req, res) => {
   try {
     const { extraDays } = req.body;
     const rental = await Rental.findById(req.params.id);
