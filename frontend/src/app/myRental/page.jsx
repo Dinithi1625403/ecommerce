@@ -9,6 +9,20 @@ export default function MyRentalsPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState("newest");
   const [viewMode, setViewMode] = useState("table");
+  const [selectedRental, setSelectedRental] = useState(null);
+  const [showDetailsModal, setShowDetailsModal] = useState(false);
+  const [animateStats, setAnimateStats] = useState(false);
+  const [notifications, setNotifications] = useState([]);
+
+  useEffect(() => {
+    setAnimateStats(true);
+    // Check for expiring rentals
+    const expiringSoon = rentals.filter(r => {
+      const daysLeft = Math.ceil((new Date(r.endDate) - new Date()) / (1000 * 60 * 60 * 24));
+      return r.status === "Active" && daysLeft <= 3 && daysLeft > 0;
+    });
+    setNotifications(expiringSoon);
+  }, [rentals]);
 
   useEffect(() => {
     const fetchMyRentals = async () => {
