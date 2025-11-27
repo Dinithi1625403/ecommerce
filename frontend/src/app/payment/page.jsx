@@ -68,5 +68,13 @@ export default function PaymentPage() {
 }
 
 
-
+const inputStyle = {
+  display: "block",
+  width: "100%",
+  padding: "10px",
+  marginTop: "8px",
+  marginBottom: "15px",
+  borderRadius: "6px",
+  border: "1px solid #ccc",
+};
 import PaymentForm from "@/components/PaymentForm"
