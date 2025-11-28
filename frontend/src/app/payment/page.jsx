@@ -1,6 +1,20 @@
 "use client";
 import React from "react";
 export default function PaymentPage() {
+    const [form, setForm] = useState({
+    cardNumber: "",
+    expiry: "",
+    cvv: "",
+    name: "",
+  });
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handlePayment = () => {
+    alert("Payment processing...");
+    // you can add API call here
+  }
     return (
     <div style={{ padding: "30px", maxWidth: "500px", margin: "auto" }}>
       <h1 style={{ textAlign: "center" }}>💳 Payment</h1>
