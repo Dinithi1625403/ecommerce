@@ -5,18 +5,20 @@ import connectDB from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import rentalRoutes from "./routes/rentalRoutes.js";
+import itemRoutes from "./routes/itemRoutes.js";
 dotenv.config();
 const app = express();
 
 connectDB();
 
 // Enhanced CORS configuration
-app.use(cors({ 
-  origin: ["http://localhost:3000", "http://127.0.0.1:3000"], 
+app.use(cors({
+  origin: ["http://localhost:3000", "http://127.0.0.1:3000"],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -28,6 +30,9 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/rentals", rentalRoutes);
+app.use("/api/items", itemRoutes);
+
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
